@@ -15,6 +15,13 @@
                     @endif
 
                     You are logged in!
+                    @if (Auth::user()->role['role'] == 'ho')
+                        {{ 'Welcome HO' }}
+                    @elseif (Auth::user()->role['role'] == 'dc')
+                        {{ 'Welcome DC' }}
+                    @elseif (Auth::user()->role['role'] == 'admin' )
+                        {{ 'Welcome Admin' }}
+                    @endif
                 </div>
             </div>
         </div>
