@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,7 +29,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    protected $username = 'username';
+    // protected $username = 'username';
     /**
      * Create a new controller instance.
      *
@@ -59,9 +60,13 @@ class LoginController extends Controller
         //LAKUKAN LOGIN
         if (auth()->attempt($login)) {
             //JIKA BERHASIL, MAKA REDIRECT KE HALAMAN HOME
-            return redirect()->route('home');
+            // return redirect()->route('home');
+            $username = Auth::user()->username;
+            $role = Auth::user()->role['role'];
+            return response()->json(['username' => $username, 'role' => $role]);
         }
         //JIKA SALAH, MAKA KEMBALI KE LOGIN DAN TAMPILKAN NOTIFIKASI 
-        return redirect()->route('login')->with(['error' => 'Email/Password salah!']);
+        return redirect()->route('/')->with(['error' => 'Email/Password salah!']);
     }
+
 }
