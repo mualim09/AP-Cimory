@@ -26,9 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         //dd(Auth::user()->username);
-        $userLogin = Auth::user()->username;
-        AktifitasHelp::simpanAktifitas($aktifitas = "sukses login $userLogin");
-        return view('home');
+        return response()->json("This is home");
+        // $userLogin = Auth::user()->username;
+        // AktifitasHelp::simpanAktifitas($aktifitas = "sukses login $userLogin");
+        // return view('home');
         
     }
 }
