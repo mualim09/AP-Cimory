@@ -32,6 +32,54 @@ class CreateUsersTable extends Migration
             $table->index('role_id');
             $table->foreign('role_id')->references('id')->on('role')->onUpdate('cascade')->onDelete('cascade');
         });
+        DB::table('users')->insert(
+            [
+                'role_id' => 1,
+                'name' => 'Ahmad Bagwi Rifai',
+                'username' => 'ahmadbagwi',
+                'email' => 'ahmadbagwi.id@gmail.com',
+                'email_verified_at' => null,
+                'password' => bcrypt('Bismillah91'),
+                'alamat' => 'Cibanteng',
+                'phone' => '085719191812'
+            ]
+        );
+        DB::table('users')->insert(
+            [
+                'role_id' => 2,
+                'name' => 'Dinda Yourista',
+                'username' => 'dinda',
+                'email' => 'dinda.ipb42@gmail.com',
+                'email_verified_at' => null,
+                'password' => bcrypt('Bismillah91'),
+                'alamat' => 'Tuban, Jawa Timur',
+                'phone' => '085719191812'
+            ]
+        );
+        DB::table('users')->insert(
+            [
+                'role_id' => 3,
+                'name' => 'Arumi Nismara',
+                'username' => 'nismara',
+                'email' => 'nismara.id@gmail.com',
+                'email_verified_at' => null,
+                'password' => bcrypt('Bismillah91'),
+                'alamat' => 'TDP',
+                'phone' => '085719191852'
+            ]
+        );
+        DB::table('users')->insert(
+            [
+                'role_id' => 4,
+                'name' => 'Rifanti',
+                'username' => 'rifanti',
+                'email' => 'rifanti.id@gmail.com',
+                'email_verified_at' => null,
+                'password' => bcrypt('Bismillah91'),
+                'alamat' => 'Cibanteng',
+                'phone' => '085719191812'
+            ]
+        );
     }
 
     /**
