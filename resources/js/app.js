@@ -19,14 +19,41 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import Vue from 'vue'
+import App from './App.vue'
+import VueRouter from 'vue-router'
+import {routes} from './routes'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueAxios from 'vue-axios'
+import axios from 'axios'
+import {ServerTable, ClientTable, Event} from 'vue-tables-2'
+import { store } from './store'
+
+Vue.use(ClientTable, {}, false, 'bootstrap4')
+Vue.use(VueRouter)
+Vue.use(VueAxios, axios)
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
+// Set default header Authorization untuk setiap request axios, dimana laravel_token telah disimpan di localStorage
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
+})
 
 const app = new Vue({
     el: '#app',
+    store,
+    router: router,
+    render: h => h(App),
 });
+
