@@ -26,7 +26,7 @@
           headings: {
             title: 'Judul',
             nama_produk: 'Nama Produk',
-            keteragan: 'Keterangan',
+            keterangan: 'Keterangan',
             created_at: 'Dibuat',
             updated_at: 'Diperbarui',
             edit:'Ubah',
