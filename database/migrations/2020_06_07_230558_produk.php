@@ -16,7 +16,7 @@ class Produk extends Migration
         Schema::create('produk', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_produk', 200);
-            $table->string('keterangan',200)->default(null);
+            $table->string('keterangan',200)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
