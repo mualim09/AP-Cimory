@@ -45,8 +45,20 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('dc/update/{id}', 'DCController@update');
     Route::delete('dc/delete/{id}', 'DCController@destroy');
 
+    // Route api harga, method create ada di register
+    Route::get('akun', 'Api\UserController@index');
+    Route::get('akun/edit/{id}', 'Api\UserController@edit');
+    Route::post('akun/update/{id}', 'Api\UserController@update');
+    Route::delete('akun/delete/{id}', 'Api\UserController@destroy');
+
+    // Route api harga
+    Route::get('harga', 'HargaController@index');
+    Route::post('harga/store', 'HargaController@store');
+    Route::get('harga/edit/{id}', 'HargaController@edit');
+    Route::post('harga/update/{id}', 'HargaController@update');
+    Route::delete('harga/delete/{id}', 'HargaController@destroy');
 });
 
-Route::get('akun', 'Api\UserController@index');
-Route::get('akun/edit/{id}', 'Api\UserController@edit');
-Route::get('kode_dc', 'DCController@kode_dc');
+    Route::get('kode_dc', 'DCController@kode_dc');
+    Route::get('id_sales', 'HargaController@id_sales');
+    Route::get('id_produk', 'HargaController@id_produk');
