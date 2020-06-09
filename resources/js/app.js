@@ -42,7 +42,9 @@ Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+// Set default baseURL untuk axios
 // Set default header Authorization untuk setiap request axios, dimana laravel_token telah disimpan di localStorage
+axios.defaults.baseURL = 'http://cimory.local/'
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 
 const router = new VueRouter({
