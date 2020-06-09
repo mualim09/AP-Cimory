@@ -1,16 +1,22 @@
-import Home from './components/Landing.vue';
-import Login from './components/user/Login.vue';
-import Register from './components/user/Register.vue';
-import DefaultDashboard from './components/user/Dashboard.vue';
-import HoDashboard from './components/ho/Dashboard.vue';
-import DcDashboard from './components/dc/Dashboard.vue';
-import AdminDashboard from './components/admin/Dashboard.vue';
-import MasterProduk from './components/admin/produk/Index.vue';
-import CreateProduk from './components/admin/produk/Create.vue';
-import EditProduk from './components/admin/produk/Edit.vue';
-import MasterSales from './components/admin/sales/Index.vue';
-import CreateSales from './components/admin/sales/Create.vue';
-import EditSales from './components/admin/sales/Edit.vue';
+import Home from './components/Landing.vue'
+import Login from './components/user/Login.vue'
+import Register from './components/user/Register.vue'
+import DefaultDashboard from './components/user/Dashboard.vue'
+import HoDashboard from './components/ho/Dashboard.vue'
+import DcDashboard from './components/dc/Dashboard.vue'
+import AdminDashboard from './components/admin/Dashboard.vue'
+import MasterProduk from './components/admin/produk/Index.vue'
+import CreateProduk from './components/admin/produk/Create.vue'
+import EditProduk from './components/admin/produk/Edit.vue'
+import MasterSales from './components/admin/sales/Index.vue'
+import CreateSales from './components/admin/sales/Create.vue'
+import EditSales from './components/admin/sales/Edit.vue'
+import MasterDC from './components/admin/dc/Index.vue'
+import CreateDC from './components/admin/dc/Create.vue'
+import EditDC from './components/admin/dc/Edit.vue'
+import MasterAkun from './components/admin/akun/Index.vue'
+import CreateAkun from './components/admin/akun/Create.vue'
+import EditAkun from './components/admin/akun/Edit.vue'
 
 export const routes = [
   {
@@ -79,6 +85,38 @@ export const routes = [
     name: 'edit-sales',
     path: '/sales/edit/:id',
     component: EditSales
+  },
+  // Route DC
+  {
+    name: 'master-dc',
+    path: '/master-dc',
+    component: MasterDC
+  },
+  {
+    name: 'create-dc',
+    path: '/create-dc',
+    component: CreateDC
+  },
+  {
+    name: 'edit-dc',
+    path: '/dc/edit/:id',
+    component: EditDC
+  },
+  // Route akun
+  {
+    name: 'master-akun',
+    path: '/master-akun',
+    component: MasterAkun
+  },
+  {
+    name: 'create-akun',
+    path: '/create-akun',
+    component: CreateAkun
+  },
+  {
+    name: 'edit-akun',
+    path: '/akun/edit/:id',
+    component: EditAkun
   },
 ];
 export default {
