@@ -17,6 +17,9 @@ import EditDC from './components/admin/dc/Edit.vue'
 import MasterAkun from './components/admin/akun/Index.vue'
 import CreateAkun from './components/admin/akun/Create.vue'
 import EditAkun from './components/admin/akun/Edit.vue'
+import MasterHarga from './components/admin/harga/Index.vue'
+import CreateHarga from './components/admin/harga/Create.vue'
+import EditHarga from './components/admin/harga/Edit.vue'
 
 export const routes = [
   {
@@ -117,6 +120,22 @@ export const routes = [
     name: 'edit-akun',
     path: '/akun/edit/:id',
     component: EditAkun
+  },
+  // Route harga
+  {
+    name: 'master-harga',
+    path: '/master-harga',
+    component: MasterHarga
+  },
+  {
+    name: 'create-harga',
+    path: '/create-harga',
+    component: CreateHarga
+  },
+  {
+    name: 'edit-harga',
+    path: '/harga/edit/:id',
+    component: EditHarga
   },
 ];
 export default {
