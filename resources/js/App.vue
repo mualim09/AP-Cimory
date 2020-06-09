@@ -2,6 +2,9 @@
   <div>
     <b-container class="container-utama">
       <b-row align-v="center" class="justify-content-md-center row-utama h-100">
+        <div class="tombol-menu" v-if="$store.state.role">
+          <b-button size="sm" variant="outline-success" @click="menuUtama">Menu Utama</b-button>
+        </div>
         <div class="tombol-logout" v-if="$store.state.username">
           <b-button size="sm" variant="outline-danger" @click="logout">Logout</b-button>
         </div>
@@ -39,15 +42,23 @@
           .catch(error => console.log(error))
           .finally(() => this.loading = false)
         
+      },
+      menuUtama () {
+        this.$router.push({name: `${localStorage.getItem('role')}-dashboard`})
       }
     }
   }
 </script>
 <style>
-  .tombol-logout {
+  .tombol-menu {
     position: fixed;
     top: 20px;
-    right: 40px;
+    right: 150px;
+  }
+  .tombol-logout {
+    position: fixed;
+    top: 80px;
+    right: 150px;
   }
   /* .container-utama {
     min-height: 70vh !important;
