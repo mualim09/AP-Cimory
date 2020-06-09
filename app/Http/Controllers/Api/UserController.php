@@ -39,6 +39,16 @@ class UserController extends Controller
         return response()->json($akun);
     }
 
+    public function update(Request $request, $id)
+    {
+        $akun = User::find($id);
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $akun->update($input);
+
+        return response()->json("sukses update akun ".$akun['username']);
+    }
+
     public function login(Request $request){
         // Validasi username dan password
         $this->validate($request, [
@@ -105,9 +115,14 @@ class UserController extends Controller
 	    }
     }
     
-    public function details()
+    public function destroy($id)
     {
-        $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
+        $akun = User::find($id);
+        $akun->delete();
+
+        return response()->json([
+            'akun' => $akun,
+            'success' => "sukses menghapus akun ".$akun['username']
+        ]);
     }
 }
