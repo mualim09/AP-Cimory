@@ -1,18 +1,40 @@
 <template>
   <b-col cols lg="10" xs=12>
     <div class="login-form mx-auto text-center">
-      <h2>Buat Produk</h2>
-      <form @submit.prevent="updateProduk">
+      <h2>Edit Harga</h2>
+      <form @submit.prevent="updateHarga">
         <div class="form-group row">
-          <label for="nama_produk" class="col-md-4 col-form-label text-md-right">Nama Produk</label>
+          <label for="sales" class="col-md-4 col-form-label text-md-right">Sales </label>
           <div class="col-md-6">
-            <input id="nama_produk" type="text" class="form-control" name="nama_produk" required autofocus v-model="produk.nama_produk">
+          <select v-model="harga.id_sales" class="form-control">
+            <option value=""></option>
+            <option v-for="sales in id_sales" :value="sales.id" :key="sales.id">
+              {{ sales.nama_sales }}
+            </option>
+          </select>
           </div>
         </div>
         <div class="form-group row">
-          <label for="keterangan" class="col-md-4 col-form-label text-md-right">Keterangan</label>
+          <label for="produk" class="col-md-4 col-form-label text-md-right">Produk </label>
           <div class="col-md-6">
-            <input id="keterangan" type="text" class="form-control" name="keterangan" v-model="produk.keterangan">
+          <select v-model="harga.id_produk" class="form-control">
+            <option value=""></option>
+            <option v-for="produk in id_produk" :value="produk.id" :key="produk.id">
+              {{ produk.nama_produk }}
+            </option>
+          </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="harga-dasar" class="col-md-4 col-form-label text-md-right">Harga Dasar </label>
+          <div class="col-md-6">
+            <input id="harga-dasar" type="text" class="form-control" name="harga-dasar" required v-model="harga.harga_dasar">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="harga-jual" class="col-md-4 col-form-label text-md-right">Harga Jual </label>
+          <div class="col-md-6">
+            <input id="harga-jual" type="text" class="form-control" name="harga-jual" v-model="harga.harga_jual">
           </div>
         </div>
         <div class="form-group row mb-0">
@@ -30,23 +52,45 @@
   export default {
     data() {
       return {
-        produk: {},
+        harga: {},
+        id_sales: [],
+        id_produk: []
       }
     },
     created() {
       this.axios
-        .get(`/api/produk/edit/${this.$route.params.id}`)
+        .get(`/api/harga/edit/${this.$route.params.id}`)
         .then((response) => {
-          this.produk = response.data;
-          console.log(response.data);
-        });
-    },
-    methods: {
-      updateProduk() {
+          this.harga = response.data
+          console.log(response.data)
+        })
+      
+      this.axios
+        .get('api/id_sales')
+        .then(response => (
+          console.log(response.data),
+          this.id_sales = response.data
+        ))
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
+
         this.axios
-          .post(`/api/produk/update/${this.$route.params.id}`, this.produk)
+        .get('api/id_produk')
+        .then(response => (
+          console.log(response.data),
+          this.id_produk = response.data
+        ))
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
+
+    },
+    
+    methods: {
+      updateHarga() {
+        this.axios
+          .post(`/api/harga/update/${this.$route.params.id}`, this.harga)
           .then(response => (
-              this.$router.push({name: 'master-produk'})
+              this.$router.push({name: 'master-harga'})
           ))
           .catch(error => console.log(error))
           .finally(() => this.loading = false)
