@@ -12,7 +12,8 @@ class Sales extends Model
 
     public $timestamps = true;
     use SoftDeletes;
-    // public function user() {
-    // 	return $this->belongsTo('App\User');
-    // }
+
+    public function harga() {
+        return $this->hasMany('App\Harga');
+    }
 }
