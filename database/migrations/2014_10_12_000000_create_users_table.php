@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id')->default(3);
+            $table->unsignedBigInteger('dc_id')->nullable();
             $table->string('name');
             $table->string('username',100)->unique();
             $table->string('email', 100)->unique();
@@ -31,6 +32,8 @@ class CreateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->index('role_id');
             $table->foreign('role_id')->references('id')->on('role')->onUpdate('cascade')->onDelete('cascade');
+            $table->index('dc_id');
+            $table->foreign('dc_id')->references('id')->on('dc')->onUpdate('cascade')->onDelete('cascade');
         });
         DB::table('users')->insert(
             [
