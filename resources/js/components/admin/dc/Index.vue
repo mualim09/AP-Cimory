@@ -1,11 +1,11 @@
 <template>
   <b-col cols lg="10" xs=12>
     <div class="login-form mx-auto text-center">
-      <h2>Master Data Produk</h2>
-      <router-link :to="{name: 'create-produk'}" class="btn btn-success">Produk Baru</router-link>
-      <v-client-table :data="tableProduk" :columns="columns" :options="options">
-        <router-link :to="{name: 'edit-produk', params: { id: props.row.id }}" slot="edit" slot-scope="props"><b-button size="sm" variant="outline-primary">Edit</b-button></router-link>
-        <b-button size="sm" variant="outline-danger" @click="deleteProduk(props.row.id)"  slot="hapus" slot-scope="props">Delete</b-button>
+      <h2>Master Data DC</h2>
+      <router-link :to="{name: 'create-dc'}" class="btn btn-success">DC Baru</router-link>
+      <v-client-table :data="tableDC" :columns="columns" :options="options">
+        <router-link :to="{name: 'edit-dc', params: { id: props.row.id }}" slot="edit" slot-scope="props"><b-button size="sm" variant="outline-primary">Edit</b-button></router-link>
+        <b-button size="sm" variant="outline-danger" @click="deleteDC(props.row.id)"  slot="hapus" slot-scope="props">Delete</b-button>
       </v-client-table>
     </div>
   </b-col>
@@ -14,9 +14,9 @@
   export default {
     data() {
       return {
-        dataProduk: [],
-        columns: ['id', 'nama_produk', 'keterangan', 'created_at', 'updated_at', 'edit', 'hapus'],
-        tableProduk: [
+        dataDC: [],
+        columns: ['id', 'kode_dc', 'nama_dc', 'created_at', 'updated_at', 'edit', 'hapus'],
+        tableDC: [
           //{
             //id: this.id, title: this.title, meta:this.meta, edit: this.created_at
           //}
@@ -24,33 +24,32 @@
         options: {
           perPage: 10,
           headings: {
-            title: 'Judul',
-            nama_produk: 'Nama Produk',
-            keteragan: 'Keterangan',
+            kode_dc: 'Kode DC',
+            nama_dc: 'Nama DC/Kota',
             created_at: 'Dibuat',
             updated_at: 'Diperbarui',
             edit:'Ubah',
             hapus: 'Hapus'
           },
-          sortable: ['id', 'nama_produk', 'created_at', 'updated_at']
+          sortable: ['id', 'kode_dc', 'nama_dc', 'created_at', 'updated_at']
         }
       }
     },
     created() {
       this.axios
-        .get('/api/produk')
+        .get('/api/dc')
         .then(response => {
-          this.dataProduk = response.data.produk
-          this.tableProduk = response.data.produk
+          this.dataDC = response.data.dc
+          this.tableDC = response.data.dc
         })
     },
     methods: {
-      deleteProduk(id) {
+      deleteDC(id) {
         this.axios
-          .delete(`/api/produk/delete/${id}`)
+          .delete(`/api/dc/delete/${id}`)
           .then(response => {
-            let i = this.dataProduk.map(item => item.id).indexOf(id); // find index of your object
-            this.dataProduk.splice(i, 1)
+            let i = this.dataDC.map(item => item.id).indexOf(id); // find index of your object
+            this.dataDC.splice(i, 1)
           })
       }
     }

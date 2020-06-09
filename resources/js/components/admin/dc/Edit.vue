@@ -1,18 +1,18 @@
 <template>
   <b-col cols lg="10" xs=12>
     <div class="login-form mx-auto text-center">
-      <h2>Buat Produk</h2>
-      <form @submit.prevent="updateProduk">
+      <h2>Edit DC</h2>
+      <form @submit.prevent="updateDC">
         <div class="form-group row">
-          <label for="nama_produk" class="col-md-4 col-form-label text-md-right">Nama Produk</label>
+          <label for="kode_dc" class="col-md-4 col-form-label text-md-right">Kode DC</label>
           <div class="col-md-6">
-            <input id="nama_produk" type="text" class="form-control" name="nama_produk" required autofocus v-model="produk.nama_produk">
+            <input id="kode_dc" type="text" class="form-control" name="kode_dc" required autofocus v-model="dc.kode_dc">
           </div>
         </div>
         <div class="form-group row">
-          <label for="keterangan" class="col-md-4 col-form-label text-md-right">Keterangan</label>
+          <label for="nama_dc" class="col-md-4 col-form-label text-md-right">Nama DC/Kota</label>
           <div class="col-md-6">
-            <input id="keterangan" type="text" class="form-control" name="keterangan" v-model="produk.keterangan">
+            <input id="nama_dc" type="text" class="form-control" name="nama_dc" v-model="dc.nama_dc">
           </div>
         </div>
         <div class="form-group row mb-0">
@@ -30,23 +30,23 @@
   export default {
     data() {
       return {
-        produk: {},
+        dc: {},
       }
     },
     created() {
       this.axios
-        .get(`/api/produk/edit/${this.$route.params.id}`)
+        .get(`/api/dc/edit/${this.$route.params.id}`)
         .then((response) => {
-          this.produk = response.data;
+          this.dc = response.data;
           console.log(response.data);
         });
     },
     methods: {
-      updateProduk() {
+      updateDC() {
         this.axios
-          .post(`/api/produk/update/${this.$route.params.id}`, this.produk)
+          .post(`/api/dc/update/${this.$route.params.id}`, this.dc)
           .then(response => (
-              this.$router.push({name: 'master-produk'})
+              this.$router.push({name: 'master-dc'})
           ))
           .catch(error => console.log(error))
           .finally(() => this.loading = false)
