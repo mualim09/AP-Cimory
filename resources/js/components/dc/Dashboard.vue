@@ -1,37 +1,31 @@
 <template>
-    <div>
-        
-    <div class="recent-items-title">
-        <h2>Halaman Dashboard DC</h2>
-    </div>
-        <h3>Data Status disini</h3>
-    </div>
+  <b-col cols lg="10" xs=12>
+  <div class="login-form mx-auto text-center">
+    <h2>Menu DC</h2>
+    <router-link to="/create-transaksi" class="nav-item nav-link"><b-button class="btn-landing" variant="success"><b-icon icon="tag"></b-icon> Input Laporan</b-button></router-link>
+    <!-- <router-link to="/edit-laporan-dc" class="nav-item nav-link"><b-button class="btn-landing" variant="primary"><b-icon icon="people"></b-icon> Master Data Sales</b-button></router-link>-->
+    <router-link to="/master-laporan-dc" class="nav-item nav-link"><b-button class="btn-landing" variant="primary"><b-icon icon="person"></b-icon> Laporan DC</b-button></router-link>       
+  </div>
+  </b-col>
 </template>
 <script>
+  
+export default {
+  components: {
     
-    export default {
-        components: {
-            
-        },
-        data() {
-            return {
-                blogs: [],
-                auth: false,
-            }
-        },
-        created() {
+  },
+  data() {
+    return {
 
-            this.axios
-                .get('/api/blogs')
-                .then(response => {
-                    this.blogs = response.data.blogs;
-                    this.success = response.data.auth;
-                });
-
-        },
-        methods: {
-            
-        }
     }
+  },
+  created() {
+
+
+  },
+  methods: {
     
+  }
+}
+  
 </script>
