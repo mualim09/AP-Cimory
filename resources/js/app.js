@@ -1,31 +1,7 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
@@ -43,19 +19,34 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 // Set default baseURL untuk axios
-// Set default header Authorization untuk setiap request axios, dimana laravel_token telah disimpan di localStorage
-axios.defaults.baseURL = 'http://cimory.local/'
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+// Set default header Authorization untuk setiap request axios, dimana laravel_token telah disimpan di vuex state/localStorage
+axios.defaults.baseURL = (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : '//cimory.local/'
+// Intercept header setiap akan request, jika tidak token hanya aktif ketika refresh laman
+axios.interceptors.request.use(
+  (config) => {
+    let token = store.state.token
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${ token }`
+    }
+    return config;
+  }, 
+  (error) => {
+    return Promise.reject(error)
+  }
+  )
+
+  // Error form global
+Vue.prototype.$errorForm = null
 
 const router = new VueRouter({
-    mode: 'history',
-    routes: routes
+  mode: 'history',
+  routes: routes
 })
 
 const app = new Vue({
-    el: '#app',
-    store,
-    router: router,
-    render: h => h(App),
+  el: '#app',
+  store,
+  router: router,
+  render: h => h(App),
 });
 
