@@ -20,6 +20,8 @@ import EditAkun from './components/admin/akun/Edit.vue'
 import MasterHarga from './components/admin/harga/Index.vue'
 import CreateHarga from './components/admin/harga/Create.vue'
 import EditHarga from './components/admin/harga/Edit.vue'
+import MasterLaporanDC from './components/dc/Index.vue'
+import CreateTransaksi from './components/dc/Create.vue'
 
 export const routes = [
   {
@@ -136,6 +138,17 @@ export const routes = [
     name: 'edit-harga',
     path: '/harga/edit/:id',
     component: EditHarga
+  },
+  // Route transaksi
+  {
+    name: 'master-laporan-dc',
+    path: '/master-laporan-dc',
+    component: MasterLaporanDC
+  },
+  {
+    name: 'create-transaksi',
+    path: '/create-transaksi',
+    component: CreateTransaksi
   },
 ];
 export default {
