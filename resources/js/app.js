@@ -20,7 +20,7 @@ Vue.use(IconsPlugin)
 
 // Set default baseURL untuk axios dengan mix variable env https://laravel.com/docs/5.6/mix#environment-variables
 // Set default header Authorization untuk setiap request axios, dimana laravel_token telah disimpan di vuex state/localStorage
-axios.defaults.baseURL = (process.env.MIX_SENTRY_DSN_PUBLIC !== undefined) ? process.env.MIX_SENTRY_DSN_PUBLIC : '//cimory.local/'
+axios.defaults.baseURL = (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : 'http://cimory.ahmadbagwi.id/'
 // Intercept header setiap akan request, jika tidak token hanya aktif ketika refresh laman
 axios.interceptors.request.use(
   (config) => {
