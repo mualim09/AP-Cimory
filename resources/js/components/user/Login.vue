@@ -42,6 +42,13 @@
               </div>
             </div>
           </form>
+          <ul>
+            <li><h2>Silahkan login dengan akun percobaan</h2></li>
+            <li><h4>Terdapat 3 akun percobaan</h4></li>
+            <li>Untuk admin username <strong>admin01</strong> password <strong>qwerty123</strong></li>
+            <li>Untuk DC Surabaya username <strong>dcsurabaya</strong> password <strong>qwerty123</strong></li>
+            <li>Untuk DC Semarang username <strong>dcsemarang</strong> password <strong>qwerty123</strong></li>
+          </ul>
           <p v-if="errorLogin" class="text-danger">{{ errorLogin }}</p>
         </div>
       </div>
