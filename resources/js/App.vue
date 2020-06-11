@@ -3,10 +3,10 @@
     <b-container class="container-utama">
       <b-row align-v="center" class="justify-content-md-center row-utama h-100">
         <div class="tombol-menu" v-if="$store.state.role">
-          <b-button size="sm" variant="outline-success" @click="menuUtama">Menu Utama</b-button>
+          <b-button size="sm" variant="primary" @click="menuUtama">Menu Utama</b-button>
         </div>
         <div class="tombol-logout" v-if="$store.state.username">
-          <b-button size="sm" variant="outline-danger" @click="logout">Logout</b-button>
+          <b-button size="sm" variant="danger" @click="logout">Logout</b-button>
         </div>
         <fade-transition origin="center" mode="out-in" :duration="250">
             <router-view>
@@ -28,12 +28,19 @@
         auth:false
       }
     },
+    beforeCreate () {
+      if (localStorage.getItem('token') == null && this.$route.name !== 'home' && this.$route.name !== 'login') {
+       // if (this.$route.name !== 'home' || this.$route.name != 'login') {
+          this.$router.push({name: 'login'})
+       // }
+      }
+    },
     methods: {
       logout(){
         const formData = new FormData();
         //formData.append('name', this.name);
         this.axios
-          .post('http://cimory.local/api/logout', formData)
+          .post('/api/logout', formData)
           .then(response => (
           this.auth = false,
           this.$store.dispatch('hapusState'),
@@ -53,12 +60,12 @@
   .tombol-menu {
     position: fixed;
     top: 20px;
-    right: 150px;
+    right: 130px;
   }
   .tombol-logout {
     position: fixed;
     top: 80px;
-    right: 150px;
+    right: 130px;
   }
   /* .container-utama {
     min-height: 70vh !important;
@@ -67,5 +74,18 @@
     padding: 10px;
     background:#c9c7c72f;
     min-height: 70vh !important;
+  }
+
+  @media screen and (max-width: 480px) {
+    .tombol-menu {
+      position: fixed;
+      top: 5px;
+      right: 5px;
+    }
+  .tombol-logout {
+      position: fixed;
+      top: 40px;
+      right: 5px;
+    }
   }
 </style>
