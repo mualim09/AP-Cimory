@@ -57,6 +57,13 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('harga/edit/{id}', 'HargaController@edit');
     Route::post('harga/update/{id}', 'HargaController@update');
     Route::delete('harga/delete/{id}', 'HargaController@destroy');
+
+    // Route api harga
+    Route::get('transaksi', 'TransaksiController@index');
+    Route::post('transaksi/store', 'TransaksiController@store');
+    // Route::get('harga/edit/{id}', 'HargaController@edit');
+    // Route::post('harga/update/{id}', 'HargaController@update');
+    // Route::delete('harga/delete/{id}', 'HargaController@destroy');
 });
 
     Route::get('kode_dc', 'DCController@kode_dc');
