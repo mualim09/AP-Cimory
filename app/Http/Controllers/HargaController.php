@@ -72,7 +72,7 @@ class HargaController extends Controller
 
   public function id_sales()
   {
-    $sales = Sales::select('id', 'nama_sales')->get();
+    $sales = Sales::select('id', 'nama_sales')->get()->toArray();
     return response()->json($sales);
   }
 
