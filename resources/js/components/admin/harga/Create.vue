@@ -3,46 +3,52 @@
     <div class="login-form mx-auto text-center">
       <h2>Buat Harga</h2>
       <form @submit.prevent="createHarga">
-        <div class="form-group row">
-          <label for="sales" class="col-md-4 col-form-label text-md-right">Sales </label>
-          <div class="col-md-6">
-          <select v-model="harga.id_sales" class="form-control">
-            <option value=""></option>
-            <option v-for="sales in id_sales" :value="sales.id" :key="sales.id">
-              {{ sales.nama_sales }}
-            </option>
-          </select>
+        <div v-if="step === 1">
+          <div class="form-group row">
+            <label for="sales" class="col-md-4 col-form-label text-md-right">Sales </label>
+            <div class="col-md-6">
+            <select v-model="harga.id_sales" @change="selectedSales($event)" class="form-control">
+              <option value=""></option>
+              <option v-for="sales in id_sales" :value="sales.id" :key="sales.id">
+                {{ sales.nama_sales }}
+              </option>
+            </select>
+            </div>
           </div>
+          <div class="form-group row">
+            <label for="produk" class="col-md-4 col-form-label text-md-right">Produk </label>
+            <div class="col-md-6">
+            <select v-model="harga.id_produk" @change="selectedProduct($event)" class="form-control">
+              <option value=""></option>
+              <option v-for="produk in id_produk" :value="produk.id"  :key="produk.id">
+                {{ produk.nama_produk }}
+              </option>
+            </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="harga-dasar" class="col-md-4 col-form-label text-md-right">Harga Dasar </label>
+            <div class="col-md-6">
+              <input id="harga-dasar" type="text" class="form-control" name="harga-dasar" required v-model="harga.harga_dasar">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="harga-jual" class="col-md-4 col-form-label text-md-right">Harga Jual </label>
+            <div class="col-md-6">
+              <input id="harga-jual" type="text" class="form-control" name="harga-jual" v-model="harga.harga_jual">
+            </div>
+          </div>
+          <b-button size="sm" variant="outline-success" @click.prevent="next">Berikutnya</b-button>
         </div>
-        <div class="form-group row">
-          <label for="produk" class="col-md-4 col-form-label text-md-right">Produk </label>
-          <div class="col-md-6">
-          <select v-model="harga.id_produk" class="form-control">
-            <option value=""></option>
-            <option v-for="produk in id_produk" :value="produk.id" :key="produk.id">
-              {{ produk.nama_produk }}
-            </option>
-          </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="harga-dasar" class="col-md-4 col-form-label text-md-right">Harga Dasar </label>
-          <div class="col-md-6">
-            <input id="harga-dasar" type="text" class="form-control" name="harga-dasar" required v-model="harga.harga_dasar">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="harga-jual" class="col-md-4 col-form-label text-md-right">Harga Jual </label>
-          <div class="col-md-6">
-            <input id="harga-jual" type="text" class="form-control" name="harga-jual" v-model="harga.harga_jual">
-          </div>
-        </div>
-        <div class="form-group row mb-0">
-          <div class="col-md-8 offset-md-4">
-          <button type="submit" class="btn btn-primary">
-            Simpan
-          </button>
-          </div>
+          <div v-if="step === 2">
+            <ul id="dataInput">
+              <li>Nama Sales: {{ nama_s }}
+              <li>Nama Produk: {{ nama_p }}</li>
+              <li>Harga Dasar: {{ harga.harga_dasar }}</li>
+              <li>Harga Jual: {{ harga.harga_jual }}</li>
+            </ul>
+          <b-button size="sm" variant="outline-success" @click.prevent="prev">Sebelumnya</b-button>
+          <b-button type="submit" variant="primary">Simpan</b-button>
         </div>
       </form>
     </div>
@@ -52,9 +58,12 @@
   export default {
     data() {
       return {
+        step: 1,
         harga: {},
         id_sales: [],
-        id_produk: []
+        id_produk: [],
+        nama_s: '',
+        nama_p: ''
       }
     },
     created() {
@@ -77,6 +86,23 @@
         .finally(() => this.loading = false)
     },
     methods: {
+      // Ambil text dari selected item https://www.itsolutionstuff.com/post/vue-js-get-selected-option-text-exampleexample.html
+      selectedSales(event) {
+        this.nama_s = event.target.options[event.target.options.selectedIndex].text
+        console.log(this.nama_s);
+      },
+      selectedProduct(event) {
+        this.nama_p = event.target.options[event.target.options.selectedIndex].text
+        console.log(this.nama_p);
+      },
+      // Memisahkan div agar menjadi multipage form https://www.raymondcamden.com/2018/01/29/a-multi-step-form-in-vuejs
+      prev() {
+        this.step--
+      },
+      next() {
+        this.step++
+      },
+      // Proses simpan harga
       createHarga() {
         this.axios
           .post('/api/harga/store', this.harga)
@@ -90,3 +116,8 @@
     }
   }
 </script>
+<style scoped>
+  #dataInput {
+    list-style: none;
+  }
+</style>
