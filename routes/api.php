@@ -67,5 +67,4 @@ Route::group(['middleware' => ['auth:api']], function(){
 });
 
     Route::get('kode_dc', 'DCController@kode_dc');
-    Route::get('id_sales', 'HargaController@id_sales');
     Route::get('id_produk', 'HargaController@id_produk');

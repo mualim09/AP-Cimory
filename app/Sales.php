@@ -12,8 +12,4 @@ class Sales extends Model
 
     public $timestamps = true;
     use SoftDeletes;
-
-    public function harga() {
-        return $this->hasMany('App\Harga');
-    }
 }

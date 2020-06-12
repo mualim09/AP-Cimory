@@ -5,17 +5,6 @@
       <form @submit.prevent="createHarga">
         <div v-if="step === 1">
           <div class="form-group row">
-            <label for="sales" class="col-md-4 col-form-label text-md-right">Sales </label>
-            <div class="col-md-6">
-            <select v-model="harga.id_sales" @change="selectedSales($event)" class="form-control">
-              <option value=""></option>
-              <option v-for="sales in id_sales" :value="sales.id" :key="sales.id">
-                {{ sales.nama_sales }}
-              </option>
-            </select>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="produk" class="col-md-4 col-form-label text-md-right">Produk </label>
             <div class="col-md-6">
             <select v-model="harga.id_produk" @change="selectedProduct($event)" class="form-control">
@@ -42,7 +31,6 @@
         </div>
           <div v-if="step === 2">
             <ul id="dataInput">
-              <li>Nama Sales: {{ nama_s }}
               <li>Nama Produk: {{ nama_p }}</li>
               <li>Harga Dasar: {{ harga.harga_dasar }}</li>
               <li>Harga Jual: {{ harga.harga_jual }}</li>
@@ -60,22 +48,11 @@
       return {
         step: 1,
         harga: {},
-        id_sales: [],
         id_produk: [],
-        nama_s: '',
         nama_p: ''
       }
     },
     created() {
-      this.axios
-        .get('api/id_sales')
-        .then(response => (
-          console.log(response.data),
-          this.id_sales = response.data
-        ))
-        .catch(error => console.log(error))
-        .finally(() => this.loading = false)
-
         this.axios
         .get('api/id_produk')
         .then(response => (
@@ -87,10 +64,6 @@
     },
     methods: {
       // Ambil text dari selected item https://www.itsolutionstuff.com/post/vue-js-get-selected-option-text-exampleexample.html
-      selectedSales(event) {
-        this.nama_s = event.target.options[event.target.options.selectedIndex].text
-        console.log(this.nama_s);
-      },
       selectedProduct(event) {
         this.nama_p = event.target.options[event.target.options.selectedIndex].text
         console.log(this.nama_p);

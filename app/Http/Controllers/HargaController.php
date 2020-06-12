@@ -18,8 +18,7 @@ class HargaController extends Controller
   public function index()
   {
     $harga = Harga::join('produk', 'harga.id_produk', '=', 'produk.id')
-      ->join('sales', 'harga.id_sales', '=', 'sales.id')
-      ->select('harga.id', 'produk.nama_produk', 'sales.nama_sales', 'harga.harga_dasar', 'harga.harga_jual', 'harga.created_at', 'harga.updated_at')
+      ->select('harga.id', 'produk.nama_produk', 'harga.harga_dasar', 'harga.harga_jual', 'harga.created_at', 'harga.updated_at')
       ->get();
 
     return response()->json([
@@ -31,7 +30,6 @@ class HargaController extends Controller
   public function store(Request $request)
   {
     $harga = new Harga([
-      'id_sales' => $request->id_sales,
       'id_produk' => $request->id_produk,
       'harga_dasar' => $request->harga_dasar,
       'harga_jual' => $request->harga_jual
@@ -68,12 +66,6 @@ class HargaController extends Controller
       'harga' => $harga,
       'success' => "sukses menghapus harga ".$harga['id_produk']
     ]);
-  }
-
-  public function id_sales()
-  {
-    $sales = Sales::select('id', 'nama_sales')->get()->toArray();
-    return response()->json($sales);
   }
 
   public function id_produk()

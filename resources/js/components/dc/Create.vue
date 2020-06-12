@@ -73,6 +73,7 @@
             <li>Jumlah Pembelian: {{ transaksi.qty_pembelian }}</li>
             <li>Jumlah  Penjualan: {{ transaksi.qty_penjualan }}</li>
             <li>Retur : {{ transaksi.qty_retur }}</li>
+            <li>Stock: {{ hitungStock }}</li>
           </ul>
           <div class="form-group row">
             <label for="stock" class="col-md-4 col-form-label text-md-right">Stock </label>
@@ -90,16 +91,11 @@
             <li>Jumlah Pembelian: {{ transaksi.qty_pembelian }}</li>
             <li>Jumlah  Penjualan: {{ transaksi.qty_penjualan }}</li>
             <li>Retur : {{ transaksi.qty_retur }}</li>
-            <li>Stok : {{ transaksi.qty_stock }}</li>
+            <li>Stok : {{ hitungStock }}</li>
           </ul>
           <b-button size="sm" variant="outline-success" @click.prevent="prev">Sebelumnya</b-button>
           <b-button type="submit" variant="primary">Simpan</b-button>
         </div>  
-            
-          
-          
-       
-      
       </form>
     </div>
   </b-col>
@@ -162,6 +158,11 @@
           ))
           .catch(error => console.log(error))
           .finally(() => this.loading = false)
+      }
+    },
+    computed: {
+      hitungStock: function () {
+        return this.transaksi.qty_stock = this.transaksi.qty_pembelian - this.transaksi.qty_penjualan - this.transaksi.qty_retur
       }
     }
   }

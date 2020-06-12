@@ -37,11 +37,6 @@ class Harga extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function sales()
-    {
-        return $this->belongsTo('App\Sales', 'id_sales');
-    }
 
     public function produk()
     {

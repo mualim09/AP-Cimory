@@ -15,7 +15,6 @@ class Harga extends Migration
     {
         Schema::create('harga', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_sales');
             $table->unsignedBigInteger('id_produk');
             $table->bigInteger('harga_dasar');
             $table->bigInteger('harga_jual');
@@ -24,9 +23,7 @@ class Harga extends Migration
         });
 
         Schema::table('harga', function (Blueprint $table) {
-            $table->index('id_sales');
             $table->index('id_produk');
-            $table->foreign('id_sales')->references('id')->on('sales')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_produk')->references('id')->on('produk')->onUpdate('cascade')->onDelete('cascade');
         });
     }
