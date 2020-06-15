@@ -46,8 +46,9 @@
             <li><h2>Silahkan login dengan akun percobaan</h2></li>
             <li><h4>Terdapat 3 akun percobaan</h4></li>
             <li>Untuk admin username <strong>admin01</strong> password <strong>qwerty123</strong></li>
-            <li>Untuk DC Surabaya username <strong>dcsurabaya</strong> password <strong>qwerty123</strong></li>
-            <li>Untuk DC Semarang username <strong>dcsemarang</strong> password <strong>qwerty123</strong></li>
+            <li>Untuk DC PESANGGRAHAN username <strong>pesanggrahan</strong> password <strong>qwerty123</strong></li>
+            <li>Untuk DC TANAH ABANG username <strong>tanahabang</strong> password <strong>qwerty123</strong></li>
+            <li>Untuk DC CILEDUG username <strong>ciledug</strong> password <strong>qwerty123</strong></li>
           </ul>
           <p v-if="errorLogin" class="text-danger">{{ errorLogin }}</p>
         </div>
