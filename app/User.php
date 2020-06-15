@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role','role_id');
     }
+
+    public function dc()
+    {
+        return $this->belongsTo('App\DC');
+    }
  
     public function hasRole($roles)
     {
@@ -69,8 +75,4 @@ class User extends Authenticatable
         return (strtolower($role)==strtolower($this->have_role->role)) ? true : false;
     }
 
-    public function dc()
-    {
-        return $this->hasMany('App\DC');
-    }
 }

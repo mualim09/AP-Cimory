@@ -14,6 +14,6 @@ class DC extends Model
     use SoftDeletes;
     
     public function user() {
-    	return $this->belongsTo('App\User');
+    	return $this->hasOne('App\User', 'dc_id');
     }
 }
