@@ -114,8 +114,7 @@ class UserController extends Controller
 
     public function logout()
     {   
-	    if (Auth::check()) {
-            Auth::logout();
+	    if (Auth::logout()) {
 	        return response()->json(['success' =>'logout_success']); 
 	    } else {
 	        return response()->json(['error' => 'anda tidak login']);
