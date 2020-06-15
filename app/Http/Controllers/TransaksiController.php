@@ -23,7 +23,7 @@ class TransaksiController extends Controller
       ->join('produk', 'transaksi_dc.id_produk', '=', 'produk.id')
       ->join('dc', 'transaksi_dc.id_dc', '=', 'dc.id')
       ->where('transaksi_dc.id_dc', $id_dc)
-      ->select('transaksi_dc.id', 'sales.nama_sales', 'produk.nama_produk', 'dc.kode_dc', 'transaksi_dc.qty_pembelian', 'transaksi_dc.qty_penjualan', 'transaksi_dc.qty_retur', 'transaksi_dc.qty_stock', 'transaksi_dc.created_at', 'transaksi_dc.updated_at')
+      ->select('transaksi_dc.id', 'sales.kode_sales', 'produk.nama_produk', 'dc.kode_dc', 'transaksi_dc.qty_pembelian', 'transaksi_dc.qty_penjualan', 'transaksi_dc.qty_retur', 'transaksi_dc.qty_stock', 'transaksi_dc.created_at', 'transaksi_dc.updated_at')
       ->get();
       return response()->json([
       'transaksi' => $transaksi,
