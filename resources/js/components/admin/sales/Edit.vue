@@ -4,15 +4,26 @@
       <h2>Edit Sales</h2>
       <form @submit.prevent="updateSales">
         <div class="form-group row">
-          <label for="nama_sales" class="col-md-4 col-form-label text-md-right">Nama Sales</label>
+          <label for="produk" class="col-md-4 col-form-label text-md-right">DC </label>
           <div class="col-md-6">
-            <input id="nama_sales" type="text" class="form-control" name="nama_sales" required autofocus v-model="sales.nama_sales">
+          <select v-model="kode_dc" @change="selectedDC($event)" class="form-control">
+            <option value="0" selected>Pilih</option>
+            <option v-for="dc in id_dc" :value="dc.kode_dc"  :key="dc.id">
+              {{ dc.kode_dc }} {{ dc.nama_dc }}
+            </option>
+          </select>
           </div>
         </div>
         <div class="form-group row">
           <label for="kode_sales" class="col-md-4 col-form-label text-md-right">Kode Sales</label>
           <div class="col-md-6">
-            <input id="kode_sales" type="text" class="form-control" name="kode_sales" v-model="sales.kode_sales">
+            <input id="kode_sales" type="text" class="form-control" name="kode_sales" v-model="kodeSalesBaru">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nama_sales" class="col-md-4 col-form-label text-md-right">Nama Sales</label>
+          <div class="col-md-6">
+            <input id="nama_sales" type="text" class="form-control" name="nama_sales" required autofocus v-model="sales.nama_sales">
           </div>
         </div>
         <div class="form-group row mb-0">
@@ -30,6 +41,9 @@
   export default {
     data() {
       return {
+        kode_dc: null,
+        kodeSalesBaru: null,
+        id_dc: {},
         sales: {},
       }
     },
@@ -37,19 +51,40 @@
       this.axios
         .get(`/api/sales/edit/${this.$route.params.id}`)
         .then((response) => {
-          this.sales = response.data;
-          console.log(response.data);
-        });
+          this.sales = response.data
+          console.log(response.data)
+        })
+      this.axios
+        .get('/api/id_dc')
+        .then(response => (
+          this.id_dc = response.data,
+          console.log(response)
+        ))
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
     },
     methods: {
       updateSales() {
+        const formData = new FormData();
+        formData.append('kode_sales', this.kodeSalesBaru)
+        formData.append('nama_sales', this.sales.nama_sales)
         this.axios
-          .post(`/api/sales/update/${this.$route.params.id}`, this.sales)
+          .post(`/api/sales/update/${this.$route.params.id}`, formData)
           .then(response => (
               this.$router.push({name: 'master-sales'})
           ))
           .catch(error => console.log(error))
           .finally(() => this.loading = false)
+      },
+      selectedDC (event) {
+        return this.axios
+        .get('/api/buat_kode_sales', { params: { dc_terpilih : this.kode_dc } })
+        .then(response => (
+          this.kodeSalesBaru = response.data,
+          console.log(response)
+        ))
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
       }
     }
   }
