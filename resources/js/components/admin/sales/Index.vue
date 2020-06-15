@@ -15,7 +15,7 @@
     data() {
       return {
         dataSales: [],
-        columns: ['id', 'nama_sales', 'kode_sales', 'created_at', 'updated_at', 'edit', 'hapus'],
+        columns: ['id', 'kode_sales', 'nama_sales',  'created_at', 'updated_at', 'edit', 'hapus'],
         tableSales: [
           //{
             //id: this.id, title: this.title, meta:this.meta, edit: this.created_at
@@ -25,14 +25,14 @@
           perPage: 10,
           headings: {
             title: 'Judul',
-            nama_sales: 'Nama Sales',
             kode_sales: 'Kode Sales',
+            nama_sales: 'Nama Sales',
             created_at: 'Dibuat',
             updated_at: 'Diperbarui',
             edit:'Ubah',
             hapus: 'Hapus'
           },
-          sortable: ['id', 'nama_sales', 'kode_sales', 'created_at', 'updated_at']
+          sortable: ['id', 'kode_sales', 'nama_sales', 'created_at', 'updated_at']
         }
       }
     },
