@@ -4,7 +4,7 @@
       <h2>Edit Produk</h2>
       <form @submit.prevent="updateProduk">
         <div class="form-group row">
-          <label for="kode_produk" class="col-md-4 col-form-label text-md-right">Keterangan</label>
+          <label for="kode_produk" class="col-md-4 col-form-label text-md-right">Kode Produk</label>
           <div class="col-md-6">
             <input id="kode_produk" type="text" class="form-control" name="kode_produk" v-model="produk.kode_produk">
           </div>
