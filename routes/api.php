@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     // Route::delete('harga/delete/{id}', 'HargaController@destroy');
 });
 
+    Route::get('id_sales', 'DCController@id_sales');
     Route::get('kode_dc', 'DCController@kode_dc');
     Route::get('id_produk', 'HargaController@id_produk');
     // Route untuk membuat kode sales baru
