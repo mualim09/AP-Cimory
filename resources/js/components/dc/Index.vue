@@ -14,7 +14,7 @@
     data() {
       return {
         dataTransaksi: [],
-        columns: ['id', 'nama_sales', 'nama_produk', 'kode_dc', 'qty_pembelian', 'qty_penjualan', 'qty_retur', 'qty_stock', 'created_at', 'updated_at'],
+        columns: ['id', 'kode_sales', 'nama_produk', 'kode_dc', 'qty_pembelian', 'qty_penjualan', 'qty_retur', 'qty_stock', 'created_at', 'updated_at'],
         tableTransaksi: [
           //{
             //id: this.id, title: this.title, meta:this.meta, edit: this.created_at
@@ -23,7 +23,7 @@
         options: {
           perPage: 10,
           headings: {
-            nama_sales: 'Nama Sales',
+            kode_sales: 'Kode Sales',
             nama_produk: 'Nama Produk',
             kode_dc: 'Kode DC',
             qty_pembelian: 'Jumlah Pembelian',
@@ -35,7 +35,7 @@
             edit:'Ubah',
             hapus: 'Hapus'
           },
-          sortable: ['id', 'nama_sales', 'nama_produk', 'kode_dc', 'qty_pembelian', 'qty_penjualan', 'qty_retur', 'qty_stock', 'created_at', 'updated_at']
+          sortable: ['id', 'kode_sales', 'nama_produk', 'kode_dc', 'qty_pembelian', 'qty_penjualan', 'qty_retur', 'qty_stock', 'created_at', 'updated_at']
         }
       }
     },
