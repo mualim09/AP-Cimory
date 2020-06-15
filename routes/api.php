@@ -68,3 +68,6 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     Route::get('kode_dc', 'DCController@kode_dc');
     Route::get('id_produk', 'HargaController@id_produk');
+    // Route untuk membuat kode sales baru
+    Route::get('id_dc', 'SalesController@id_dc');
+    Route::get('buat_kode_sales', 'SalesController@buat_kode_sales');
