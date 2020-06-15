@@ -58,12 +58,12 @@
 </script>
 <style>
   .tombol-menu {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 130px;
   }
   .tombol-logout {
-    position: fixed;
+    position: absolute;
     top: 80px;
     right: 130px;
   }
