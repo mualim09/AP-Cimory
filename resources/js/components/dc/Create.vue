@@ -10,7 +10,7 @@
             <select v-model="transaksi.id_sales" @change="selectedSales($event)" class="form-control">
               <option value=""></option>
               <option v-for="sales in id_sales" :value="sales.id" :key="sales.id">
-                {{ sales.nama_sales }}
+                {{ sales.kode_sales }}
               </option>
             </select>
             </div>
@@ -114,7 +114,7 @@
     },
     created() {
       this.axios
-        .get('api/id_sales')
+        .get('api/id_sales', { params: { username: localStorage.getItem('username') } })
         .then(response => (
           console.log(response.data),
           this.id_sales = response.data
@@ -122,7 +122,7 @@
         .catch(error => console.log(error))
         .finally(() => this.loading = false)
 
-        this.axios
+      this.axios
         .get('api/id_produk')
         .then(response => (
           console.log(response.data),
