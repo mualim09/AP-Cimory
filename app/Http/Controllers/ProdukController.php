@@ -26,8 +26,8 @@ class ProdukController extends Controller
   public function store(Request $request)
   {
     $produk = new Produk([
-      'nama_produk' => $request->nama_produk,
-      'keterangan' => $request->keterangan
+      'kode_produk' => $request->kode_produk,
+      'nama_produk' => $request->nama_produk
     ]);
 
     if ($produk->save()) {

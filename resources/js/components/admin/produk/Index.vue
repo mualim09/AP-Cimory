@@ -15,24 +15,19 @@
     data() {
       return {
         dataProduk: [],
-        columns: ['id', 'nama_produk', 'keterangan', 'created_at', 'updated_at', 'edit', 'hapus'],
-        tableProduk: [
-          //{
-            //id: this.id, title: this.title, meta:this.meta, edit: this.created_at
-          //}
-        ],
+        columns: ['kode_produk', 'nama_produk', 'created_at', 'updated_at', 'edit', 'hapus'],
+        tableProduk: [],
         options: {
           perPage: 10,
           headings: {
-            title: 'Judul',
-            nama_produk: 'Nama Produk',
-            keterangan: 'Keterangan',
+            nama_produk: 'Kode Produk',
+            keterangan: 'Nama Produk',
             created_at: 'Dibuat',
             updated_at: 'Diperbarui',
             edit:'Ubah',
             hapus: 'Hapus'
           },
-          sortable: ['id', 'nama_produk', 'created_at', 'updated_at']
+          sortable: ['kode_produk', 'nama_produk', 'created_at', 'updated_at']
         }
       }
     },

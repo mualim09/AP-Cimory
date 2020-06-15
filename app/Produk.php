@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Produk extends Model
 {
     protected $table = 'produk';
-    protected $fillable = ['nama_produk', 'keterangan'];
+    protected $fillable = ['kode_produk', 'nama_produk'];
 
     public $timestamps = true;
     use SoftDeletes;

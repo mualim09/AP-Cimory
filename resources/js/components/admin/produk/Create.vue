@@ -4,15 +4,15 @@
       <h2>Buat Produk</h2>
       <form @submit.prevent="createProduk">
         <div class="form-group row">
-          <label for="nama_produk" class="col-md-4 col-form-label text-md-right">Nama Produk</label>
+          <label for="kode_produk" class="col-md-4 col-form-label text-md-right">Kode Produk</label>
           <div class="col-md-6">
-            <input id="nama_produk" type="text" class="form-control" name="nama_produk" required autofocus v-model="produk.nama_produk">
+            <input id="kode_produk" type="text" class="form-control" name="kode_produk" v-model="produk.kode_produk">
           </div>
         </div>
         <div class="form-group row">
-          <label for="keterangan" class="col-md-4 col-form-label text-md-right">Keterangan</label>
+          <label for="nama_produk" class="col-md-4 col-form-label text-md-right">Nama Produk</label>
           <div class="col-md-6">
-            <input id="keterangan" type="text" class="form-control" name="keterangan" v-model="produk.keterangan">
+            <input id="nama_produk" type="text" class="form-control" name="nama_produk" required autofocus v-model="produk.nama_produk">
           </div>
         </div>
         <div class="form-group row mb-0">
