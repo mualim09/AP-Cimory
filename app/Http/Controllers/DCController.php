@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DC;
+use App\Sales;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class DCController extends Controller
 {
@@ -61,6 +64,19 @@ class DCController extends Controller
       'dc' => $dc,
       'success' => "sukses menghapus dc ".$dc['kode_dc']
     ]);
+  }
+
+  public function id_sales(Request $request)
+  {
+    $username = $request->username;
+    // Hasil pluck adalah single array
+    $kode_dc = User::join('dc', 'users.dc_id', '=', 'dc.id')
+    ->where('users.username', $username)
+    ->select('dc.kode_dc')
+    ->pluck('dc.kode_dc');
+    $list_sales = Sales::where('kode_sales', 'like', "$kode_dc[0]%")->select('id', 'kode_sales')->get();
+    //$no_sales_max = Sales::where('kode_sales', 'like', "$dc_terpilih%")->max('kode_sales');
+    return response()->json($list_sales);
   }
 
   public function kode_dc()
