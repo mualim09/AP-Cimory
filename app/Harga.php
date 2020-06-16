@@ -40,6 +40,6 @@ class Harga extends Authenticatable
 
     public function produk()
     {
-        return $this->belongsTo('App\Produk', 'id_produk');
+        return $this->belongsTo('App\Produk');
     }
 }

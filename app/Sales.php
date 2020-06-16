@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Sales extends Model
 {
     protected $table = 'sales';
-    protected $fillable = ['nama_sales', 'kode_sales'];
+    protected $fillable = ['nama_sales'];
 
     public $timestamps = true;
     use SoftDeletes;
+
+    public function penjualan() {
+    	return $this->hasMany('App\Penjualan');
+    }
 }

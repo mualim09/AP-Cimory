@@ -16,4 +16,8 @@ class Produk extends Model
     public function harga() {
         return $this->hasMany('App\Harga');
     }
+
+    public function pembelian() {
+        return $this->hasMany('App\Pembelian');
+    }
 }
