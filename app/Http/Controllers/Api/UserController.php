@@ -55,14 +55,7 @@ class UserController extends Controller
             'username' => 'required|string',
             'password' => 'required|string|min:6',
         ]);
-        // $validator = $request->validateWithBag('post', [
-        //     'username' => ['required', 'string', 'max:50'],
-        //     'password' => ['required' ,'string', 'min:6'],
-        // ]);
-        // if ($validator->fails()) {
-        //     $errorValidator = $validator->messages()->get('*');
-        // }
-        // $errors = $$validator->messages()->get('*');
+
         // Otomatis tipe login dengan username atau email, keduanya bisa walaupun form input username
         $loginType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
       
@@ -78,8 +71,9 @@ class UserController extends Controller
             $token = Auth::user()->createToken('nApp')->accessToken;
             $username = Auth::user()->username;
             $role = Auth::user()->role['role'];
+            $kode_dc = Auth::user()->dc['kode_dc'];
             $status_auth = Auth::check();
-            return response()->json(['token' => $token, 'username' => $username, 'role' => $role, 'status' => $status_auth]);
+            return response()->json(['token' => $token, 'username' => $username, 'role' => $role, 'status' => $status_auth, 'kode_dc' => $kode_dc]);
         } else {
             return response()->json(['error' => 'username atau password salah'], 401);
         }
