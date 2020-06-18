@@ -22,6 +22,12 @@ import CreateHarga from './components/admin/harga/Create.vue'
 import EditHarga from './components/admin/harga/Edit.vue'
 import MasterLaporanDC from './components/dc/Index.vue'
 import CreateTransaksi from './components/dc/Create.vue'
+import MasterPembelian from './components/dc/pembelian/Index.vue'
+import CreatePembelian from './components/dc/pembelian/Create.vue'
+import MasterPenjualan from './components/dc/penjualan/Index.vue'
+import CreatePenjualan from './components/dc/penjualan/Create.vue'
+import MasterRetur from './components/dc/retur/Index.vue'
+import CreateRetur from './components/dc/retur/Create.vue'
 
 export const routes = [
   {
@@ -150,7 +156,40 @@ export const routes = [
     path: '/create-transaksi',
     component: CreateTransaksi
   },
+  // Route pembelian DC
+  {
+    name: 'master-pembelian',
+    path: '/master-pembelian',
+    component: MasterPembelian
+  },
+  {
+    name: 'create-pembelian',
+    path: '/create-pembelian',
+    component: CreatePembelian
+  },
+  // Route penjualan DC
+  {
+    name: 'master-penjualan',
+    path: '/master-penjualan',
+    component: MasterPenjualan
+  },
+  {
+    name: 'create-penjualan',
+    path: '/create-penjualan',
+    component: CreatePenjualan
+  },
+  // Route retur DC
+  {
+    name: 'master-retur',
+    path: '/master-retur',
+    component: MasterRetur
+  },
+  {
+    name: 'create-retur',
+    path: '/create-retur',
+    component: CreateRetur
+  },
 ];
 export default {
-    
+
 }
