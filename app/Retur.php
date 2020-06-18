@@ -12,8 +12,12 @@ class Retur extends Model
 
     public $timestamps = true;
     use SoftDeletes;
-    
+
     public function dc() {
     	return $this->belongsTo('App\DC');
+    }
+
+    public function produk() {
+    	return $this->belongsTo('App\Produk');
     }
 }
