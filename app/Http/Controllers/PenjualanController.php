@@ -20,13 +20,14 @@ class PenjualanController extends Controller
         return response()->json($penjualan);
     }
     // Mengurangi stok berdasarkan data pembelian (tanggal_pembelian = tanggal_penjualan, produk_id)
-    public function update_stok($tanggal_penjualan, $produk_id, $qty_penjualan)
+    public function update_stok($dc_id, $tanggal_penjualan, $kode_transaksi, $produk_id, $qty_penjualan)
     {
-        $qty_pembelian = Pembelian::where('produk_id', $produk_id)->where('tanggal_pembelian', $tanggal_penjualan)->first()->qty_pembelian;
+        $qty_pembelian = Pembelian::where('dc_id', $dc_id)->where('produk_id', $produk_id)->where('tanggal_pembelian', $tanggal_penjualan)->first()->qty_pembelian;
         $qty_stok = $qty_pembelian - $qty_penjualan;
         $stok = new Stok([
+            'dc_id' => $dc_id,
             'tanggal_stok' => $tanggal_penjualan,
-            'keterangan' => 'penjualan',
+            'keterangan' => "penjualan ".$kode_transaksi,
             'produk_id' => $produk_id,
             'qty_stok' => $qty_stok,
         ]);
@@ -48,7 +49,7 @@ class PenjualanController extends Controller
         ]);
 
         $penjualan = new Penjualan($request->all());
-        if ($this->update_stok($tgl_penjualan = $penjualan['tanggal_penjualan'], $produk_id = $penjualan['produk_id'], $qty_penjualan = $penjualan['qty_penjualan'])) {
+        if ($this->update_stok($dc_id = $penjualan['dc_id'], $tgl_penjualan = $penjualan['tanggal_penjualan'], $kode_transaksi = $penjualan['kode_transaksi'], $produk_id = $penjualan['produk_id'], $qty_penjualan = $penjualan['qty_penjualan'])) {
             $penjualan->save();
             return response()->json("Sukses ".$penjualan['kode_transaksi']);
         } else {
