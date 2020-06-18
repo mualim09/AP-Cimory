@@ -32,12 +32,12 @@
         <div class="form-group row">
           <label for="produk_id" class="col-md-4 col-form-label text-md-right">Produk</label>
           <div class="col-md-6">
-          <select v-model="pembelian.produk_id" class="form-control">
-            <option value=""></option>
-            <option v-for="produk in cari_produk" :value="produk.id"  :key="produk.id">
-              {{ produk.nama_produk }}
-            </option>
-          </select>
+            <select v-model="pembelian.produk_id" class="form-control">
+              <option value=""></option>
+              <option v-for="data_produk in cari_produk" :value="data_produk.produk.id" :key="data_produk.produk.id">
+                {{ data_produk.produk.nama_produk }}
+              </option>
+            </select>
           </div>
         </div>
 
