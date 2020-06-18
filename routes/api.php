@@ -89,3 +89,6 @@ Route::group(['middleware' => ['auth:api']], function(){
     // Test route retur
     Route::get('retur/{kode_dc}', 'ReturController@index');
     Route::post('retur/store', 'ReturController@store');
+
+    // Test route stok
+    Route::get('stok/{kode_dc}', 'StokController@index');
