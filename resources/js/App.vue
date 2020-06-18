@@ -1,19 +1,24 @@
 <template>
   <div>
     <b-container class="container-utama">
+      <b-row class="justify-content-md-center p-2">
+        <b-nav>
+          <div class="xtombol-menu" v-if="$store.state.role">
+            Selamat datang <strong>{{ $store.state.username }} - {{ $store.state.dc }}</strong>
+            <b-button size="sm" variant="primary" @click="menuUtama">Menu Utama</b-button>
+          </div>
+          <div class="xtombol-logout" v-if="$store.state.username">
+            <b-button size="sm" variant="danger" @click="logout">Logout</b-button>
+          </div>
+        </b-nav>
+      </b-row>
       <b-row align-v="center" class="justify-content-md-center row-utama h-100">
-        <div class="tombol-menu" v-if="$store.state.role">
-          <b-button size="sm" variant="primary" @click="menuUtama">Menu Utama</b-button>
-        </div>
-        <div class="tombol-logout" v-if="$store.state.username">
-          <b-button size="sm" variant="danger" @click="logout">Logout</b-button>
-        </div>
         <fade-transition origin="center" mode="out-in" :duration="250">
             <router-view>
             </router-view>
         </fade-transition>
       </b-row>
-    </b-container>     
+    </b-container>
   </div>
 </template>
 
@@ -29,7 +34,7 @@
       }
     },
     beforeCreate () {
-      if (localStorage.getItem('token') == null && this.$route.name !== 'home' && this.$route.name !== 'login') {
+      if (localStorage.getItem('token') == null && this.$route.name !== 'home' && this.$route.name !== 'login' && this.$route.name !== 'register') {
        // if (this.$route.name !== 'home' || this.$route.name != 'login') {
           this.$router.push({name: 'login'})
        // }
@@ -48,7 +53,7 @@
           ))
           .catch(error => console.log(error))
           .finally(() => this.loading = false)
-        
+
       },
       menuUtama () {
         this.$router.push({name: `${localStorage.getItem('role')}-dashboard`})
