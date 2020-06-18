@@ -33,4 +33,10 @@ class PembelianController extends Controller
 
         return response()->json("Sukses ".$pembelian);
     }
+
+    public function grafik_pembelian($tanggal_pencarian, $produk_id)
+    {
+        $pembelian = Pembelian::with('dc:dc.id,kode_dc', 'produk:produk.id,nama_produk')->where('tanggal_pembelian', $tanggal_pencarian)->where('produk_id', $produk_id)->get();
+        return response()->json($pembelian);
+    }
 }
