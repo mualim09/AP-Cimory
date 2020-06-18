@@ -75,7 +75,8 @@
       this.$store.dispatch('simpanState', {
         username: response.data.username,
         role: response.data.role,
-        token: response.data.token
+        token: response.data.token,
+        dc: response.data.kode_dc
       }),
       this.$router.push({name: `${response.data.role}-dashboard`}),
       console.log(response.data)
