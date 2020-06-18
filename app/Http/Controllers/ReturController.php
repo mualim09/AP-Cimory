@@ -20,13 +20,14 @@ class ReturController extends Controller
         return response()->json($retur);
     }
     // Mengurangi stok terakhir dari tabel stok berdasarkan tanggal stok
-    public function update_stok($produk_id, $qty_retur, $tanggal_sjr)
+    public function update_stok($dc_id, $produk_id, $qty_retur, $tanggal_sjr, $kode_sjr)
     {
-        $qty_stok_terakhir = Stok::where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first()->qty_stok;
+        $qty_stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first()->qty_stok;
         $qty_stok = $qty_stok_terakhir - $qty_retur;
         $stok = new Stok([
+            'dc_id' => $dc_id,
             'tanggal_stok' => $tanggal_sjr,
-            'keterangan' => 'retur',
+            'keterangan' => "retur ".$kode_sjr,
             'produk_id' => $produk_id,
             'qty_stok' => $qty_stok,
         ]);
@@ -46,7 +47,7 @@ class ReturController extends Controller
         ]);
 
         $retur = new Retur($request->all());
-        if ($this->update_stok($produk_id = $retur['produk_id'], $qty_retur = $retur['qty_retur'], $tanggal_sjr = $retur['tanggal_sjr'])) {
+        if ($this->update_stok($dc_id = $retur['dc_id'], $produk_id = $retur['produk_id'], $qty_retur = $retur['qty_retur'], $tanggal_sjr = $retur['tanggal_sjr'], $kode_sjr = $retur['kode_sjr'])) {
             $retur->save();
             return response()->json("Sukses ".$retur['kode_transaksi']);
         } else {
