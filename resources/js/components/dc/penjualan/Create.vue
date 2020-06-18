@@ -70,7 +70,7 @@
         <b-button type="submit" variant="primary">Simpan</b-button>
 
       </form>
-      <span class="info">Tanggal penjualan harus sama dengan tanggal pembelian sebuah produk,<br>karena jika ada perulangan pembelian produk yang sama dikemudian hari,<br>jumlah stok diketahui berdasarkan pembelian produk xx tgl xx - penjualan produk xx tgl xx</span>
+      <span class="info">Tanggal penjualan harus sama dengan tanggal pembelian sebuah produk,<br>karena jika ada perulangan pembelian produk yang sama dikemudian hari,<br>jumlah stok diketahui berdasarkan pembelian produk xx tgl xx - penjualan produk xx tgl xx - retur</span>
     </div>
   </b-col>
 </template>
