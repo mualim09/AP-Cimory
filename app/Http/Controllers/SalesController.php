@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class SalesController extends Controller
 {
   public function __construct()
-  {   
+  {
     // $this->middleware('auth:api', ['except' => ['checkAuth', 'index', 'category', 'show', 'ambil_csrf']]);
   }
 
@@ -70,6 +70,12 @@ class SalesController extends Controller
     return response()->json($dc);
   }
 
+  public function cari_sales($kode_dc)
+  {
+    $cari_sales = Sales::where('kode_sales', 'like', "$kode_dc%")->select('id', 'kode_sales')->get();
+    return response()->json($cari_sales);
+  }
+
   public function buat_kode_sales(Request $request)
   {
     // Ambil data DC, karena sales ini dibuat untuk dilokasi DC mana
@@ -87,7 +93,7 @@ class SalesController extends Controller
     // Jika $no_sales_terakhir !== null, tingkatkan 1 angka (increment) dari $no_sales_terakhir
       $no_sales_terakhir++;
     }
-    // Karena $no_sales_terakhir sekarang integer, tetapi kode_sales string, maka ubah ke string 
+    // Karena $no_sales_terakhir sekarang integer, tetapi kode_sales string, maka ubah ke string
     // Karena integer tidak ada 0 diawal, jika $no_sales_terakhir++ < 10 tambahkan 0 didepan
     if ($no_sales_terakhir < 10) {
       $no_sales_baru = "0{$no_sales_terakhir}";
