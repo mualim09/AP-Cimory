@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Penjualan extends Model
 {
     protected $table = 'penjualan';
-    protected $fillable = ['dc_id', 'tanggal_penjualan', 'kode_transaksi', 'sales_id', 'qty_penjualan', 'nilai_penjualan'];
+    protected $fillable = ['dc_id', 'tanggal_penjualan', 'kode_transaksi', 'sales_id', 'produk_id', 'qty_penjualan', 'nilai_penjualan'];
 
     public $timestamps = true;
     use SoftDeletes;
-    
+
     public function produk() {
-    	return $this->hasMany('App\Produk');
+    	return $this->belongsTo('App\Produk');
     }
 
     public function sales() {
