@@ -12,7 +12,7 @@ class DC extends Model
 
     public $timestamps = true;
     use SoftDeletes;
-    
+
     public function user() {
     	return $this->hasOne('App\User');
     }
@@ -27,5 +27,9 @@ class DC extends Model
 
     public function retur() {
     	return $this->hasMany('App\Retur');
+    }
+
+    public function stok() {
+    	return $this->hasMany('App\Stok');
     }
 }
