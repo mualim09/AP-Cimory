@@ -12,12 +12,24 @@ class Produk extends Model
 
     public $timestamps = true;
     use SoftDeletes;
-    
+
     public function harga() {
         return $this->hasMany('App\Harga');
     }
 
     public function pembelian() {
         return $this->hasMany('App\Pembelian');
+    }
+
+    public function penjualan() {
+        return $this->hasMany('App\Penjualan');
+    }
+
+    public function retur() {
+        return $this->hasMany('App\Retur');
+    }
+
+    public function stok() {
+        return $this->hasMany('App\Stok');
     }
 }
