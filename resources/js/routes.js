@@ -28,6 +28,7 @@ import MasterPenjualan from './components/dc/penjualan/Index.vue'
 import CreatePenjualan from './components/dc/penjualan/Create.vue'
 import MasterRetur from './components/dc/retur/Index.vue'
 import CreateRetur from './components/dc/retur/Create.vue'
+import MasterStok from './components/dc/stok/Index.vue'
 
 export const routes = [
   {
@@ -189,6 +190,12 @@ export const routes = [
     path: '/create-retur',
     component: CreateRetur
   },
+  // Route retur DC
+  {
+    name: 'master-stok',
+    path: '/master-stok',
+    component: MasterStok
+  }
 ];
 export default {
 
