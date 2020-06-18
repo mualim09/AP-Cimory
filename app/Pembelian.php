@@ -12,10 +12,6 @@ class Pembelian extends Model
 
     public $timestamps = true;
     use SoftDeletes;
-    
-    public function produk() {
-    	return $this->hasMany('App\Produk');
-    }
 
     public function sales() {
     	return $this->hasMany('App\Sales');
