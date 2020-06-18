@@ -68,7 +68,24 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     Route::get('id_sales', 'DCController@id_sales');
     Route::get('kode_dc', 'DCController@kode_dc');
+
+    Route::get('cari_dc', 'DCController@cari_dc');
+    Route::get('cari_sales/{kode_dc}', 'SalesController@cari_sales');
+    Route::get('cari_produk', 'ProdukController@cari_produk');
+
     Route::get('id_produk', 'HargaController@id_produk');
     // Route untuk membuat kode sales baru
     Route::get('id_dc', 'SalesController@id_dc');
     Route::get('buat_kode_sales', 'SalesController@buat_kode_sales');
+
+    // Test route pembelian
+    Route::get('pembelian/{kode_dc}', 'PembelianController@index');
+    Route::post('pembelian/store', 'PembelianController@store');
+
+    // Test route penjualan
+    Route::get('penjualan/{kode_dc}', 'PenjualanController@index');
+    Route::post('penjualan/store', 'PenjualanController@store');
+
+    // Test route retur
+    Route::get('retur/{kode_dc}', 'ReturController@index');
+    Route::post('retur/store', 'ReturController@store');
