@@ -19,6 +19,7 @@ class Penjualan extends Migration
             $table->date('tanggal_penjualan');
             $table->string('kode_transaksi', 20);
             $table->unsignedBigInteger('sales_id');
+            $table->unsignedBigInteger('produk_id');
             $table->bigInteger('qty_penjualan');
             $table->bigInteger('nilai_penjualan');
             $table->timestamps();
@@ -27,7 +28,9 @@ class Penjualan extends Migration
         Schema::table('penjualan', function (Blueprint $table) {
             $table->index('dc_id');
             $table->index('sales_id');
+            $table->index('produk_id');
             $table->foreign('dc_id')->references('id')->on('dc')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('produk_id')->references('id')->on('produk')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('sales_id')->references('id')->on('sales')->onUpdate('cascade')->onDelete('cascade');
         });
     }
