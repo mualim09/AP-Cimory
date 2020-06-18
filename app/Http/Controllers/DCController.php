@@ -84,4 +84,10 @@ class DCController extends Controller
     $kode_dc = DC::select('id', 'kode_dc', 'nama_dc')->get()->toArray();
     return response()->json($kode_dc);
   }
+
+  public function cari_dc()
+  {
+    $cari_dc = DC::select('id', 'kode_dc', 'nama_dc')->get();
+    return response()->json($cari_dc);
+  }
 }
