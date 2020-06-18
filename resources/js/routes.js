@@ -29,6 +29,7 @@ import CreatePenjualan from './components/dc/penjualan/Create.vue'
 import MasterRetur from './components/dc/retur/Index.vue'
 import CreateRetur from './components/dc/retur/Create.vue'
 import MasterStok from './components/dc/stok/Index.vue'
+import MasterGrafik from './components/ho/grafik/Index.vue'
 
 export const routes = [
   {
@@ -195,6 +196,12 @@ export const routes = [
     name: 'master-stok',
     path: '/master-stok',
     component: MasterStok
+  },
+  // Route grafik
+  {
+    name: 'master-grafik',
+    path: '/master-grafik',
+    component: MasterGrafik
   }
 ];
 export default {
