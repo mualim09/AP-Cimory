@@ -92,3 +92,6 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     // Test route stok
     Route::get('stok/{kode_dc}', 'StokController@index');
+
+    //Route laporan ho/grafig/odbc_tableprivileges
+    Route::get('grafik_pembelian/{tanggal_pencarian}/{produk_id}', 'PembelianController@grafik_pembelian');
