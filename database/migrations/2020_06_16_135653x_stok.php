@@ -15,6 +15,7 @@ class Stok extends Migration
     {
       Schema::create('stok', function (Blueprint $table) {
           $table->bigIncrements('id');
+          $table->unsignedBigInteger('dc_id');
           $table->date('tanggal_stok');
           $table->string('keterangan');
           $table->unsignedBigInteger('produk_id');
@@ -23,7 +24,9 @@ class Stok extends Migration
           $table->softDeletes();
       });
       Schema::table('stok', function (Blueprint $table) {
+          $table->index('dc_id');
           $table->index('produk_id');
+          $table->foreign('dc_id')->references('id')->on('dc')->onUpdate('cascade')->onDelete('cascade');
           $table->foreign('produk_id')->references('id')->on('produk')->onUpdate('cascade')->onDelete('cascade');
       });
     }
