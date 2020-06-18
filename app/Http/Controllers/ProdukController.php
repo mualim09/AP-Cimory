@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Produk;
+use App\Harga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
   public function __construct()
-  {   
+  {
     //$this->middleware('auth:api', ['except' => ['ambil_csrf']]);
   }
 
@@ -61,5 +62,12 @@ class ProdukController extends Controller
       'produk' => $produk,
       'success' => "sukses menghapus blog ".$produk['nama_produk']
     ]);
+  }
+
+  public function cari_produk()
+  {
+    // $cari_produk = Produk::with('harga:harga.id,harga_dasar,harga_jual')->get();
+    $cari_produk = Harga::with('produk:produk.id,nama_produk')->get();
+    return response()->json($cari_produk);
   }
 }
