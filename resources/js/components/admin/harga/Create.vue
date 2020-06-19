@@ -54,7 +54,7 @@
     },
     created() {
         this.axios
-        .get('api/cari_produk')
+        .get('/api/cari_produk')
         .then(response => (
           console.log(response.data),
           this.cari_produk = response.data
