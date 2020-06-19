@@ -16,15 +16,15 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="harga-dasar" class="col-md-4 col-form-label text-md-right">Harga Dasar </label>
+            <label for="harga_dasar" class="col-md-4 col-form-label text-md-right">Harga Dasar </label>
             <div class="col-md-6">
-              <input id="harga-dasar" type="text" class="form-control" name="harga-dasar" required v-model="harga.harga_dasar">
+              <input id="harga_dasar" type="text" class="form-control" required v-model="harga.harga_dasar">
             </div>
           </div>
           <div class="form-group row">
-            <label for="harga-jual" class="col-md-4 col-form-label text-md-right">Harga Jual </label>
+            <label for="harga_jual" class="col-md-4 col-form-label text-md-right">Harga Jual </label>
             <div class="col-md-6">
-              <input id="harga-jual" type="text" class="form-control" name="harga-jual" v-model="harga.harga_jual">
+              <input id="harga_jual" type="text" class="form-control" v-model="harga.harga_jual">
             </div>
           </div>
           <b-button size="sm" variant="outline-success" @click.prevent="next">Berikutnya</b-button>
@@ -61,11 +61,11 @@
         })
 
         this.axios
-        .get('api/cari_produk')
+        .get('/api/cari_produk')
         .then(response => (
           console.log(response.data),
           this.cari_produk = response.data,
-          this.nama_p = response.data.nama_produk
+          this.nama_p = response.data.produk.nama_produk
         ))
         .catch(error => console.log(error))
         .finally(() => this.loading = false)
