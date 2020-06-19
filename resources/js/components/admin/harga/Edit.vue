@@ -7,12 +7,12 @@
           <div class="form-group row">
             <label for="produk" class="col-md-4 col-form-label text-md-right">Produk </label>
             <div class="col-md-6">
-            <select v-model="harga.id_produk" @click="selectedProduct($event)" class="form-control">
-              <option value=""></option>
-              <option v-for="produk in id_produk" :value="produk.id"  :key="produk.id">
-                {{ produk.nama_produk }}
-              </option>
-            </select>
+              <select v-model="harga.produk_id" @change="selectedProduct($event)" class="form-control">
+                <option value=""></option>
+                <option v-for="data_produk in cari_produk" :value="data_produk.produk.id" :key="data_produk.produk.id">
+                  {{ data_produk.produk.nama_produk }}
+                </option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -48,7 +48,7 @@
       return {
         step: 1,
         harga: {},
-        id_produk: [],
+        cari_produk: [],
         nama_p: ''
       }
     },
@@ -59,19 +59,19 @@
           this.harga = response.data
           console.log(response.data)
         })
-      
+
         this.axios
-        .get('api/id_produk')
+        .get('api/cari_produk')
         .then(response => (
           console.log(response.data),
-          this.id_produk = response.data,
+          this.cari_produk = response.data,
           this.nama_p = response.data.nama_produk
         ))
         .catch(error => console.log(error))
         .finally(() => this.loading = false)
 
     },
-    
+
     methods: {
       // Ambil text dari selected item https://www.itsolutionstuff.com/post/vue-js-get-selected-option-text-exampleexample.html
       selectedProduct(event) {
@@ -85,7 +85,7 @@
       prev() {
         this.step--
       },
-    
+
       // Proses update harga
       updateHarga() {
         this.axios

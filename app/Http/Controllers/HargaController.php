@@ -11,15 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class HargaController extends Controller
 {
   public function __construct()
-  {   
+  {
     // $this->middleware('auth:api', ['except' => ['checkAuth', 'index', 'category', 'show', 'ambil_csrf']]);
   }
 
   public function index()
   {
-    $harga = Harga::join('produk', 'harga.id_produk', '=', 'produk.id')
-      ->select('harga.id', 'produk.nama_produk', 'harga.harga_dasar', 'harga.harga_jual', 'harga.created_at', 'harga.updated_at')
-      ->get();
+    $harga = Harga::with('produk:produk.id,produk_id,nama_produk')->get();
 
     return response()->json([
       'harga' => $harga,
@@ -30,7 +28,7 @@ class HargaController extends Controller
   public function store(Request $request)
   {
     $harga = new Harga([
-      'id_produk' => $request->id_produk,
+      'produk_id' => $request->produk_id,
       'harga_dasar' => $request->harga_dasar,
       'harga_jual' => $request->harga_jual
     ]);
@@ -54,7 +52,7 @@ class HargaController extends Controller
     $harga = Harga::find($id);
     $harga->update($request->all());
 
-    return response()->json("sukses update harga ".$harga['id_produk']);
+    return response()->json("sukses update harga ".$harga['produk_id']);
   }
 
   public function destroy($id)
