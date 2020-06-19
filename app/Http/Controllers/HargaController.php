@@ -17,7 +17,7 @@ class HargaController extends Controller
 
   public function index()
   {
-    $harga = Harga::with('produk:produk.id,produk_id,nama_produk')->get();
+    $harga = Harga::with('produk:produk.id,nama_produk')->get();
 
     return response()->json([
       'harga' => $harga,
