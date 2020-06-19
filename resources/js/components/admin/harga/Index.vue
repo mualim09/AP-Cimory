@@ -15,7 +15,7 @@
     data() {
       return {
         dataHarga: [],
-        columns: ['id', 'nama_produk', 'harga_dasar', 'harga_jual', 'created_at', 'updated_at', 'edit', 'hapus'],
+        columns: ['id', 'produk.nama_produk', 'harga_dasar', 'harga_jual', 'created_at', 'updated_at', 'edit', 'hapus'],
         tableHarga: [],
         options: {
           perPage: 10,
@@ -28,7 +28,7 @@
             edit:'Ubah',
             hapus: 'Hapus'
           },
-          sortable: ['id', 'nama_produk', 'harga_dasar', 'harga_jual', 'created_at', 'updated_at']
+          sortable: ['id', 'produk.nama_produk', 'harga_dasar', 'harga_jual', 'created_at', 'updated_at']
         }
       }
     },
