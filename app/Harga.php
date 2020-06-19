@@ -17,7 +17,7 @@ class Harga extends Authenticatable
      */
     protected $table = 'harga';
     protected $fillable = [
-        'id_sales', 'id_produk', 'harga_dasar', 'harga_jual',
+        'id_sales', 'produk_id', 'harga_dasar', 'harga_jual',
     ];
 
     /**
