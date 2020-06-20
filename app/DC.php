@@ -32,4 +32,8 @@ class DC extends Model
     public function stok() {
     	return $this->hasMany('App\Stok');
     }
+
+    public function laporan() {
+    	return $this->hasMany('App\Laporan');
+    }
 }
