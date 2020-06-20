@@ -13,7 +13,7 @@ class TransaksiDc extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi_dc', function (Blueprint $table) {
+        Schema::create('laporan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_dc');
             $table->date('tanggal');
@@ -26,7 +26,7 @@ class TransaksiDc extends Migration
             $table->softDeletes();
         });
 
-        Schema::table('transaksi_dc', function (Blueprint $table) {
+        Schema::table('laporan', function (Blueprint $table) {
             $table->index('id_produk');
             $table->index('id_dc');
             $table->foreign('id_produk')->references('id')->on('produk')->onUpdate('cascade')->onDelete('cascade');
