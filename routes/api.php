@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth:api']], function(){
     // Route::get('harga/edit/{id}', 'HargaController@edit');
     // Route::post('harga/update/{id}', 'HargaController@update');
     // Route::delete('harga/delete/{id}', 'HargaController@destroy');
-});
+
 
     Route::get('id_sales', 'DCController@id_sales');
     Route::get('kode_dc', 'DCController@kode_dc');
@@ -93,5 +93,10 @@ Route::group(['middleware' => ['auth:api']], function(){
     // Test route stok
     Route::get('stok/{kode_dc}', 'StokController@index');
 
+    // Test laporan harian dc
+    Route::get('laporan-harian/{kode_dc}', 'LaporanController@index');
+
     //Route laporan ho/grafig/odbc_tableprivileges
     Route::get('grafik_pembelian/{tanggal_pencarian}/{produk_id}', 'PembelianController@grafik_pembelian');
+
+  });
