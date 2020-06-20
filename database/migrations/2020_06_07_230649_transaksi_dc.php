@@ -15,9 +15,9 @@ class TransaksiDc extends Migration
     {
         Schema::create('transaksi_dc', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_produk');
-            $table->unsignedBigInteger('id_sales');
             $table->unsignedBigInteger('id_dc');
+            $table->date('tanggal');
+            $table->unsignedBigInteger('id_produk');
             $table->bigInteger('qty_pembelian');
             $table->bigInteger('qty_penjualan');
             $table->bigInteger('qty_retur');
@@ -28,10 +28,8 @@ class TransaksiDc extends Migration
 
         Schema::table('transaksi_dc', function (Blueprint $table) {
             $table->index('id_produk');
-            $table->index('id_sales');
             $table->index('id_dc');
             $table->foreign('id_produk')->references('id')->on('produk')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_sales')->references('id')->on('sales')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_dc')->references('id')->on('dc')->onUpdate('cascade')->onDelete('cascade');
         });
     }
