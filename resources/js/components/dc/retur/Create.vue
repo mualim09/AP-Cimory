@@ -44,7 +44,7 @@
         <div class="form-group row">
           <label for="qty_retur" class="col-md-4 col-form-label text-md-right">Qty Retur</label>
           <div class="col-md-6">
-            <input id="qty_retur" type="text" class="form-control" v-model="retur.qty_retur">
+            <input id="qty_retur" type="number" class="form-control" v-model="retur.qty_retur">
           </div>
         </div>
 
