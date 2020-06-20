@@ -56,7 +56,7 @@
         <div class="form-group row">
           <label for="qty_penjualan" class="col-md-4 col-form-label text-md-right">Qty Penjualan</label>
           <div class="col-md-6">
-            <input id="qty_penjualan" type="text" class="form-control" @change="nilaiPenjualan" v-model="penjualan.qty_penjualan">
+            <input id="qty_penjualan" type="number" class="form-control" @change="nilaiPenjualan" v-model="penjualan.qty_penjualan">
           </div>
         </div>
 
