@@ -20,20 +20,22 @@ class ReturController extends Controller
 
         return response()->json($retur);
     }
-    // Mengurangi stok terakhir dari tabel stok berdasarkan tanggal stok
+
     public function update_stok($dc_id, $produk_id, $qty_retur, $tanggal_sjr, $kode_sjr)
     {
-        $qty_stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first()->qty_stok;
-        $qty_stok = $qty_stok_terakhir - $qty_retur;
-        $stok = new Stok([
-            'dc_id' => $dc_id,
-            'tanggal_stok' => $tanggal_sjr,
-            'keterangan' => "retur ".$kode_sjr,
-            'produk_id' => $produk_id,
-            'qty_stok' => $qty_stok,
-        ]);
-        if ($stok->save()){
-          return true;
+        // Cari stok terakhir untuk dikurangi qty_retur dan disimpan di tabel stok
+        $stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first()->qty_stok;
+        // Stok terakhir seharusnya tidak null karena pembelian pertama kali menghasilkan stok => PembelianController => 67
+        if ($stok_terakhir != null) {
+          $qty_stok = $stok_terakhir - $qty_retur;
+          $stok = new Stok([
+              'dc_id' => $dc_id,
+              'tanggal_stok' => $tanggal_sjr,
+              'keterangan' => "retur ".$kode_sjr." : ".$qty_retur,
+              'produk_id' => $produk_id,
+              'qty_stok' => $qty_stok,
+          ]);
+          $stok->save();
         }
     }
 
@@ -41,27 +43,25 @@ class ReturController extends Controller
     {
         // Cari data laporan yang akan diupdate
         $laporan = Laporan::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first();
-        // Jika tanggal laporan terakhir/yang ada == tanggal_penjualan, update stok laporan tersebut. Berarti pembelian penjualan dan retur dihari yang sama
+        // dd($laporan);
+        // Jika tanggal laporan terakhir/yang ada == tanggal_sjr, update retur dan stok laporan tersebut. Berarti pembelian penjualan dan retur dihari yang sama
         if ($laporan->tanggal == $tanggal_sjr) {
-          $laporan->qty_retur = $qty_retur;
-          $laporan->qty_stok = $laporan->qty_pembelian - $laporan->qty_penjualan - $qty_retur;
-          if ($laporan->save()) {
-            return true;
-          }
+          // $laporan->qty_retur = $qty_retur;
+          // $laporan->qty_stok = $laporan->qty_pembelian - $laporan->qty_penjualan - $qty_retur;
+          // $laporan->save();
+          $update_laporan = Laporan::where('id', $laporan->id)->update(array('qty_retur' => $qty_retur, 'qty_stok' => $laporan->qty_stok - $qty_retur));
         } else {
-        $stok = $laporan->qty_stok;
-        // Jika tanggal laporan terakhir != tanggal_penjualan, buat row laporan baru, artinya tidak ada pembelian dan penjualan tapi ada retur
-        $new_laporan = new Laporan([
-          'dc_id' => $dc_id,
-          'tanggal' => $tanggal_sjr,
-          'produk_id' => $produk_id,
-          'qty_pembelian' => 0,
-          'qty_penjualan' => 0,
-          'qty_stok' => number_format($laporan->qty_stok) - number_format($qty_retur)
-        ]);
-        if ($new_laporan->save()) {
-          return true;
-        }
+        // Jika tanggal laporan terakhir != tanggal_sjr, buat row laporan baru, artinya tidak ada pembelian dan penjualan tapi ada retur
+          $new_laporan = new Laporan([
+            'dc_id' => $dc_id,
+            'tanggal' => $tanggal_sjr,
+            'produk_id' => $produk_id,
+            'qty_pembelian' => 0,
+            'qty_penjualan' => 0,
+            'qty_retur' => $qty_retur,
+            'qty_stok' => $laporan->qty_stok - $qty_retur
+          ]);
+          $new_laporan->save();
         }
     }
 
@@ -76,9 +76,9 @@ class ReturController extends Controller
         ]);
 
         $retur = new Retur($request->all());
-        if ($this->update_stok($dc_id = $retur['dc_id'], $produk_id = $retur['produk_id'], $qty_retur = $retur['qty_retur'], $tanggal_sjr = $retur['tanggal_sjr'], $kode_sjr = $retur['kode_sjr'])) {
-            $this->update_laporan($dc_id = $retur['dc_id'], $produk_id = $retur['produk_id'], $qty_retur = $retur['qty_retur'], $tanggal_sjr = $retur['tanggal_sjr'], $kode_sjr = $retur['kode_sjr']);
-            $retur->save();
+        if ($retur->save()) {
+            $this->update_stok($dc_id = $retur['dc_id'], $produk_id = $retur['produk_id'], $qty_retur = $retur['qty_retur'], $tanggal_sjr = $retur['tanggal_sjr'], $kode_sjr = $retur['kode_sjr']);
+            $this->update_laporan($dc_id = $retur['dc_id'], $tanggal_sjr = $retur['tanggal_sjr'], $produk_id = $retur['produk_id'], $qty_retur = $retur['qty_retur']);
             return response()->json("Sukses ".$retur['kode_transaksi']);
         } else {
             return response()->json("Harap periksa input anda");
