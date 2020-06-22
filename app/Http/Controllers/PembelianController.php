@@ -48,7 +48,7 @@ class PembelianController extends Controller
         $stok = new Stok([
             'dc_id' => $dc_id,
             'tanggal_stok' => $tanggal_pembelian,
-            'keterangan' => "pembelian ".$keterangan,
+            'keterangan' => "pembelian ".$keterangan." : ".$qty_pembelian,
             'produk_id' => $produk_id,
             'qty_stok' => $stok_terbaru
         ]);
@@ -73,8 +73,8 @@ class PembelianController extends Controller
               'tanggal' => $tanggal_pembelian,
               'produk_id' => $produk_id,
               'qty_pembelian' => $qty_pembelian,
-              'qty_penjualan' => 0, // Ini akan berubah ketika ada penjualan/retur
-              'qty_retur' => 0, // Ini akan berubah ketika ada penjualan/retur
+              'qty_penjualan' => 0, // Ini akan berubah ketika ada penjualan
+              'qty_retur' => 0, // Ini akan berubah ketika ada retur
               'qty_stok' => $stok_terbaru // Ini akan berubah ketika ada penjualan/retur
         ]);
         if ($laporan->save()) {
@@ -93,12 +93,10 @@ class PembelianController extends Controller
         ]);
 
         $pembelian = new Pembelian($request->all());
-        if ($this->update_laporan($dc_id = $pembelian['dc_id'], $tanggal_pembelian = $pembelian['tanggal_pembelian'], $produk_id = $pembelian['produk_id'], $qty_pembelian = $pembelian['qty_pembelian'])) {
-            $this->update_stok($dc_id = $pembelian['dc_id'], $tanggal_pembelian = $pembelian['tanggal_pembelian'], $produk_id = $pembelian['produk_id'], $keterangan = $pembelian['no_invoice'], $qty_pembelian = $pembelian['qty_pembelian']);
-            // $this->update_laporan($dc_id = $pembelian['dc_id'], $tanggal_pembelian = $pembelian['tanggal_pembelian'], $produk_id = $pembelian['produk_id'], $qty_pembelian = $pembelian['qty_pembelian']);
-            $pembelian->save();
+        if ($pembelian->save()) {
+          $this->update_laporan($dc_id = $pembelian['dc_id'], $tanggal_pembelian = $pembelian['tanggal_pembelian'], $produk_id = $pembelian['produk_id'], $qty_pembelian = $pembelian['qty_pembelian']);
+          $this->update_stok($dc_id = $pembelian['dc_id'], $tanggal_pembelian = $pembelian['tanggal_pembelian'], $produk_id = $pembelian['produk_id'], $keterangan = $pembelian['no_invoice'], $qty_pembelian = $pembelian['qty_pembelian']);
         }
-
         return response()->json("Sukses ".$pembelian);
     }
 
