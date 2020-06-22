@@ -36,10 +36,10 @@ class PembelianController extends Controller
     public function update_stok($dc_id, $tanggal_pembelian, $produk_id, $keterangan, $qty_pembelian)
     {
         // Cari stok terakhir untuk ditambahkan dengan qty_pembelian => Done
-        $stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first()->qty_stok;
+        $stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first();
         // Jika ditemukan stok terakhir tambahkan dengan qty_pembelian
         if ($stok_terakhir != null){
-            $stok_terbaru = $stok_terakhir + $qty_pembelian;
+            $stok_terbaru = $stok_terakhir->qty_stok + $qty_pembelian;
         } else {
         // Jika stok terakhir = null, artinya ini pembelian pertama kali (sistem mulai dipakai)
             $stok_terbaru = $qty_pembelian;
@@ -60,9 +60,9 @@ class PembelianController extends Controller
     public function update_laporan($dc_id, $tanggal_pembelian, $produk_id, $qty_pembelian)
     {
         // Cari stok terakhir untuk ditambahkan dengan qty_pembelian dan disimpan di tabel laporan
-        $stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first()->qty_stok;
+        $stok_terakhir = Stok::where('dc_id', $dc_id)->where('produk_id', $produk_id)->orderBy('created_at', 'desc')->first();
         if ($stok_terakhir != null){
-            $stok_terbaru = $stok_terakhir + $qty_pembelian;
+            $stok_terbaru = $stok_terakhir->qty_stok + $qty_pembelian;
         } else {
         // Jika stok terakhir = null, artinya ini pembelian pertama kali (sistem mulai dipakai)
             $stok_terbaru = $qty_pembelian;
