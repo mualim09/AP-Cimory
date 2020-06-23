@@ -14,18 +14,20 @@
     data() {
       return {
         dataPembelian: [],
-        columns: ['dc.kode_dc', 'tanggal_pembelian', 'no_invoice', 'produk.nama_produk', 'qty_pembelian'],
+        columns: ['dc.kode_dc', 'tanggal', 'produk.nama_produk', 'qty_pembelian', 'qty_penjualan', 'qty_retur', 'qty_stok'],
         tablePembelian: [],
         options: {
           perPage: 100,
           headings: {
             'dc.kode_dc': 'Kode DC',
-            tanggal_pembelian: 'Tanggal Pembelian',
-            no_invoice: 'No. Invoice',
+            tanggal: 'Tanggal',
             'produk.nama_produk': 'Produk',
-            qty_pembelian: 'Qty Pembelian',
+            qty_pembelian: 'Pembelian',
+            qty_penjualan: 'Penjualan',
+            qty_retur: 'Retur',
+            qty_stok: 'Stok'
           },
-          sortable: ['kode_dc', 'tanggal_pembelian', 'no_invoice', 'nama_produk', 'qty_pembelian']
+          sortable: ['dc.kode_dc', 'tanggal', 'produk.nama_produk', 'qty_pembelian', 'qty_penjualan', 'qty_retur', 'qty_stok']
         }
       }
     },
