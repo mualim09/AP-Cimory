@@ -12,24 +12,13 @@ class PembelianController extends Controller
 {
     public function index($kode_dc)
     {
-        // Ambil data pembelian berdasarkan kode_dc
-        // $pembelian = App\Pembelian::where('tanggal_pembelian', '2020-06-18')->where('dc_id', 1)->get();
-        // $penjualan = App\Penjualan::groupBy('produk_id')->where('tanggal_penjualan', '2020-06-18')->where('dc_id', 1)->selectRaw('sum(qty_penjualan) as jumlah_penjualan, produk_id')->get();
-        // $stok = App\Stok::groupBy('produk_id')->where('tanggal_stok', '2020-06-18')->where('dc_id', 3)->selectRaw('max(id) as id_terakhir, produk_id, qty_stok')->get();
-        // $stok = App\Stok::where('produk_id', 1)->where('tanggal_stok', '2020-06-18')->where('dc_di', 3)->orderBy('created_at', 'desc')->first();
-        $pembelian = Pembelian::with('dc:dc.id,kode_dc', 'produk:produk.id,nama_produk')
+        // Ambil data pembelian berdasarkan kode_dc dengan relasi dan where
+        $pembelian = Laporan::with('dc:dc.id,kode_dc', 'produk:produk.id,nama_produk')
         ->whereHas('dc', function ($query) use ($kode_dc) {
             $query->where('kode_dc', $kode_dc);
         })->get();
-        // $stok = App\Stok::where('produk_id', 1)->where('tanggal_stok', '2020-06-18')->where('dc_di', 3)->orderBy('created_at', 'desc')->first();
-        // $laporan_harian = Pembelian::with('dc:dc.id,kode_dc', 'produk:produk.id,nama_produk', 'penjualan:penjualan.id')
-        // ->whereHas('dc', function ($query) use ($kode_dc) {
-        //     $query->where('kode_dc', 'DC1');
-        // })
-        // ->with('pembelian:pembelian.id,tanggal_pembelian,qty_pembelian')
-        // ->whereHas('pembelian',function ($query) {
-        //     $query->where('kode_dc', 'DC1')
-        // })
+        // Gunakan data laporan sebagai tabel pembelian
+        // $pembelian= Laporan::with('dc:dc.id,kode_dc', 'produk:produk.id,nama_produk')->where('dc_id', $kode_dc)->get();
         return response()->json($pembelian);
     }
 
