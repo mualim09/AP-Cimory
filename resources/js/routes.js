@@ -30,6 +30,8 @@ import MasterRetur from './components/dc/retur/Index.vue'
 import CreateRetur from './components/dc/retur/Create.vue'
 import MasterStok from './components/dc/stok/Index.vue'
 import MasterGrafik from './components/ho/grafik/Index.vue'
+import MasterHarian from './components/ho/laporan/Harian.vue'
+import MasterKompensasi from './components/ho/laporan/Kompensasi.vue'
 
 export const routes = [
   {
@@ -202,6 +204,17 @@ export const routes = [
     name: 'master-grafik',
     path: '/master-grafik',
     component: MasterGrafik
+  },
+  // Route laporan ho
+  {
+    name: 'master-harian',
+    path: '/master-harian',
+    component: MasterHarian
+  },
+  {
+    name: 'master-kompensasi',
+    path: '/master-kompensasi',
+    component: MasterKompensasi
   }
 ];
 export default {
