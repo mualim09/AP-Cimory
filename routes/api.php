@@ -95,8 +95,11 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     // Test laporan harian dc
     Route::get('laporan-harian/{kode_dc}', 'LaporanController@index');
+    Route::get('harian/{tanggal}/{produk_id}', 'LaporanController@harian');
 
     //Route laporan ho/grafig/odbc_tableprivileges
     Route::get('grafik_pembelian/{tanggal_pencarian}/{produk_id}', 'PembelianController@grafik_pembelian');
 
+    Route::get('kompensasi', 'LaporanController@kompensasi');
+    Route::get('grafik_penjualan', 'LaporanController@grafik_penjualan');
   });
