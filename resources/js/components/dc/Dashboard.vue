@@ -1,6 +1,6 @@
 <template>
   <b-col cols lg="10" xs=12>
-  <div class="login-form mx-auto text-center">
+  <div class="mx-auto text-center">
     <h2>Menu DC</h2>
     <router-link to="/create-pembelian" class="nav-item nav-link"><b-button class="btn-landing" variant="success"><b-icon icon="tag"></b-icon>Pembelian</b-button></router-link>
     <router-link to="/create-penjualan" class="nav-item nav-link"><b-button class="btn-landing" variant="success"><b-icon icon="tag"></b-icon>Penjualan</b-button></router-link>
