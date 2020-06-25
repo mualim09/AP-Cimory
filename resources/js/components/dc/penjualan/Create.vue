@@ -130,7 +130,7 @@
       hargaProduk(event) {
         var self = this
         this.cari_produk.forEach(function callback(element, index, array) {
-          // console.log(element)
+          console.log(element)
           if (element.produk_id == self.penjualan['produk_id']) {
             console.log(element.harga_jual)
             self.harga = element.harga_jual
