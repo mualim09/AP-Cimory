@@ -61,7 +61,7 @@ class LaporanController extends Controller
         $grafik_penjualan = Laporan::groupBy('dc.kode_dc', 'produk.nama_produk', 'laporan.qty_penjualan', 'laporan.qty_pembelian')
         ->join('produk', 'laporan.produk_id', '=', 'produk.id')
         ->join('dc', 'laporan.dc_id', '=', 'dc.id')
-        ->where('tanggal', $tanggal)
+        ->whereDate('tanggal', 'LIKE', $tanggal)
         ->select('dc.kode_dc', 'produk.nama_produk')
         ->selectRaw('sum(laporan.qty_penjualan) as penjualan, sum(laporan.qty_pembelian) as pembelian')
         ->get();
