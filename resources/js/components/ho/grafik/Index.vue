@@ -1,7 +1,7 @@
 <template>
   <b-col cols lg="10" xs=12>
     <b-row>
-      <form @submit.prevent="cariGrafik">
+      <form @submit.prevent="cariGrafikBaru">
 
         <div class="form-group row">
           <label for="tanggal" class="col-md-4 col-form-label text-md-right">Tanggal Pencarian</label>
@@ -38,15 +38,14 @@
   </b-col>
 </template>
 <script>
-import BarChart from './BarChart.vue'
-
+  import BarChart from './BarChart.vue'
   export default {
     name: 'BarChartContainer',
     components: { BarChart },
     data() {
       return {
         loaded: false,
-        tanggal: null,
+        tanggal: '2020-06-25',
         chartData: {
           },
         pembelian: {},
@@ -77,7 +76,7 @@ import BarChart from './BarChart.vue'
     },
     mounted (){
 
-      },
+    },
     async created() {
       this.axios
         .get('api/cari_produk')
@@ -114,8 +113,8 @@ import BarChart from './BarChart.vue'
         })
         .catch(error => console.log(error))
     },
-    method: {
-      cariGrafik() {
+    methods: {
+      cariGrafikBaru() {
         this.axios
           .get('api/cari_produk')
           .then(response => (
@@ -128,7 +127,7 @@ import BarChart from './BarChart.vue'
           this.loaded = false
           new Promise(function (resolve, reject){
             self.axios
-              .get(`/api/grafik_penjualan`, { params: {tanggal: this.tanggal }})
+              .get(`/api/grafik_penjualan`, { params: {tanggal: self.tanggal }})
               .then(response => (
                 self.chartData = {
                   labels: response.data.map(item => item.kode_dc),
